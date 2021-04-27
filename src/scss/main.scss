@@ -1,0 +1,21 @@
+$headerColor: #026aa7;
+$buttonColor: #4e97c2;
+$buttonHoverColor: #3588b9;
+
+.wrapper {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva,
+    Verdana, sans-serif;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+@import 'reset.scss';
+@import '../components/nav.scss';
+@import '../components/Modal/modal.scss';
+@import '../components/Board/board.scss';
+@import '../components/Content/AllBoards/allBoards.scss';
+@import '../components/Content/Workspace/workspace.scss';

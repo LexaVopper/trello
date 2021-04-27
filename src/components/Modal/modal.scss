@@ -1,0 +1,35 @@
+.modal {
+  width: 280px;
+  max-height: 523px;
+  background-color: rgb(255, 255, 255);
+  top: 45px;
+  position: fixed;
+  border-radius: 3px;
+  border: 1px black;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.555);
+  overflow: hidden;
+
+  &__content {
+    max-height: 507px;
+    margin: 8px 4px 8px 8px;
+    overflow-x: hidden;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    border-radius: 3px;
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: #ecedf0;
+      border-radius: 8px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #cfd3da;
+      border-radius: 8px;
+    }
+  }
+}
