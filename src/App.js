@@ -1,6 +1,6 @@
 import React from 'react';
 import AllBoards from './components/Content/AllBoards/AllBoards';
-import AllBoards from './components/Content/Workspace/Workspace';
+import Workspace from './components/Content/Workspace/Workspace';
 
 import NavBar from './components/NavBar';
 

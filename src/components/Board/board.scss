@@ -9,15 +9,22 @@
     display: flex;
     align-self: flex-start;
     flex-direction: row;
+    width: 268px;
     input {
       background-color: #fff;
+      width: 98%;
+      border: 0;
       box-shadow: inset 0 0 0 2px #dfe1e6;
+      padding: 8px 12px;
     }
 
-    button {
+    .button {
       background-color: #fff;
       color: black;
-      margin-left: 10px;
+
+      &:hover {
+        background-color: #fff;
+      }
     }
   }
 }

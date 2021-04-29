@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Modal from '../Modal/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faStar, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 function Board({ blockRef }) {
+  const [description, openDescr] = useState(false);
+
+  const openModalWindow = () => {
+    !description ? openDescr(true) : openDescr(false);
+  };
   return (
     <Modal refer={blockRef.current}>
       <div className='board'>
         <div className='board__input'>
           <input></input>
-          <button>
+          <button className='button'>
             <FontAwesomeIcon icon={faPlus} className='menu-icon delete' />
           </button>
         </div>

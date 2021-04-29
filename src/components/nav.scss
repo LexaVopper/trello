@@ -15,7 +15,7 @@
     display: flex;
     align-items: center;
     width: 50%;
-    button {
+    .button {
       height: 32px;
       cursor: pointer;
       line-height: 32px;
@@ -91,6 +91,7 @@
       background-color: $buttonColor;
       padding: 8px 30px 8px 8px;
     }
+
     .search-icon {
       position: absolute;
       top: 25%;
@@ -101,7 +102,7 @@
   }
   @media (max-width: 730px) {
     &__block1 {
-      button {
+      .button {
         span {
           display: none;
         }
@@ -118,6 +119,9 @@
     &__input {
       input {
         display: none;
+      }
+      .search-icon {
+        position: initial;
       }
       span {
         display: flex;
