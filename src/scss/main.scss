@@ -2,6 +2,7 @@ $headerColor: #026aa7;
 $buttonColor: #4e97c2;
 $buttonHoverColor: #3588b9;
 $mainhover: rgba(9, 30, 66, 0.08);
+$boardColor: rgb(176, 70, 50);
 
 .wrapper {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva,
@@ -13,10 +14,32 @@ $mainhover: rgba(9, 30, 66, 0.08);
   align-items: flex-start;
   justify-content: center;
 }
+.login,
+.registration {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    input {
+      width: 200px;
+      height: 40px;
+      margin-bottom: 10px;
+      line-height: 20px;
+      font-size: 20px;
+    }
+  }
+}
 
 @import 'reset.scss';
-@import '../components/nav.scss';
+@import '../components/NavBar/nav.scss';
 @import '../components/Modal/modal.scss';
 @import '../components/Board/board.scss';
 @import '../components/Content/AllBoards/allBoards.scss';
 @import '../components/Content/Workspace/workspace.scss';
+@import '../components/EditBoard/Edit.scss';

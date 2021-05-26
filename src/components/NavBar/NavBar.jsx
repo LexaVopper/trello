@@ -9,12 +9,17 @@ import {
   faBell,
   faSearch,
 } from '@fortawesome/free-solid-svg-icons';
-import Board from './Board/Board';
+import Board from '../Board/Board';
+import { useHistory } from 'react-router-dom';
 
 const NavBar = React.memo(function NavBar() {
   const blockRef = React.useRef(null);
   const [modal, openModal] = useState(false);
+  const history = useHistory();
 
+  const goHome = () => {
+    history.push('/home');
+  };
   const openModalWindow = () => {
     !modal ? openModal(true) : openModal(false);
   };
@@ -26,7 +31,7 @@ const NavBar = React.memo(function NavBar() {
           <button className='button'>
             <FontAwesomeIcon icon={faLandmark} className='menu-icon' />
           </button>
-          <button className='button home'>
+          <button onClick={() => goHome()} className='button home'>
             <FontAwesomeIcon icon={faHome} className='menu-icon' />
           </button>
           <button className='button' onClick={() => openModalWindow()}>

@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 function Modal({ children, refer }) {
-  console.log(refer, ' eeeeeeeee');
   if (!refer) {
     return <div></div>;
   }

@@ -1,0 +1,44 @@
+.edit {
+  padding: 5px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  &__menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}
+.separate-line {
+  &:before {
+    content: '';
+    width: 1px;
+    height: 18px;
+    display: block;
+    background: $buttonColor;
+    margin: 0 6px 0 2px;
+  }
+}
+
+.profile {
+  width: 32px;
+  height: 32px;
+  background-color: red;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  align-items: center;
+  margin-right: 4px;
+}
+.invite {
+  position: relative;
+}
