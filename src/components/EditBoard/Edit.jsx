@@ -1,16 +1,37 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faColumns } from '@fortawesome/free-solid-svg-icons';
-import { useHistory, useParams } from 'react-router-dom';
-import Modal from '../Modal/Modal';
+import { useParams } from 'react-router-dom';
 
-function Edit() {
+import { getUserIdByEmail } from './invite';
+import { useDispatch, useSelector } from 'react-redux';
+
+import Modal from '../Modal/Modal';
+import { useForm } from 'react-hook-form';
+
+const Edit = React.memo(function Edit() {
   const { id } = useParams();
+  const { register, handleSubmit } = useForm();
   const blockRef = React.useRef(null);
+
+  const dispatch = useDispatch();
+  const [toggle, self_Invite] = useState(false);
+  const emailNotFound = useSelector((state) => state?.checkEmail?.error);
+  const userEmail = useSelector((state) => state?.getUser?.user?.email);
+
   const [modal, openModal] = useState(false);
 
   const openModalWindow = () => {
     !modal ? openModal(true) : openModal(false);
+  };
+
+  const onSubmit = (data) => {
+    if (data.user === userEmail) {
+      self_Invite(true);
+    } else {
+      self_Invite(false);
+      dispatch(getUserIdByEmail(data, id));
+    }
   };
 
   return (
@@ -41,10 +62,22 @@ function Edit() {
           <span className='separate-line' />
           <div className='profile'>А</div>
           <button className='button'>
-            <span className='single-text invite' ref={blockRef} onClick={() => openModalWindow()}>
-              Пригласить
-            </span>
-            {modal && <Modal refer={blockRef.current}></Modal>}
+            <Modal
+              target={({ onClick }) => (
+                <span className='single-text invite' onClick={onClick}>
+                  <span className='invite__text'>Пригласить</span>
+                </span>
+              )}
+              currentId='Invite'>
+              <form onSubmit={handleSubmit(onSubmit)} className='invite-form'>
+                <span className='invite-form__title'>Пригласить на доску</span>
+
+                <input {...register('user')} placeholder='mail' className='invite-form__email' />
+                {toggle && <span className='invite-form__error'>Нельзя отправить себе</span>}
+                {emailNotFound && <span className='invite-form__error'>Такой почты нет</span>}
+                <input type='submit' className='invite-form__submit' />
+              </form>
+            </Modal>
           </button>
         </div>
         <div className='nav__menu'>
@@ -61,6 +94,6 @@ function Edit() {
       <div className='edit__block block'></div>
     </section>
   );
-}
+});
 
 export default Edit;

@@ -49,14 +49,14 @@ class Firebase {
       .child(`${id}`)
       .set({ id: id, name: name });
   }
-  // getUser(data) {
-  //   firebase
-  //     .login(data.mail, data.password)
-  //     .then(() => {
-  //       dispatch(getUser());
-  //     })
-  //     .catch((error) => console.log(error));
-  // }
+
+  addEmailField(email, id) {
+    this.db.ref().child(`db/emails`).child(`${id}`).set(`${email}`);
+  }
+
+  sendInvite(creator, boardId) {
+    this.db.ref().child(`db/users/user/${creator}/invite`).child(`${boardId}`).set({ id: boardId });
+  }
 
   deleteCustomer(id) {
     if (this.auth.currentUser.isAnonymous) return Promise.resolve();

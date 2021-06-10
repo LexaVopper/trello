@@ -1,12 +1,9 @@
-import firebase from 'firebase';
+import firebase from '../FirebaseApi/fireApi';
 
 export const getUser = (id) => (dispatch) => {
-  firebase
-    .database()
-    .ref(`db/users/user/${id}/`)
-    .on('value', function (data) {
-      dispatch(getUserInfo(data.val()));
-    });
+  firebase.db.ref(`db/users/user/${id}/`).on('value', function (data) {
+    dispatch(getUserInfo(data.val()));
+  });
 };
 
 export const getUserInfo = (user) => ({

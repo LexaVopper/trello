@@ -116,9 +116,9 @@
   }
 }
 .button {
+  position: relative;
   height: 32px;
   cursor: pointer;
-  line-height: 32px;
 
   background-color: $buttonColor;
   color: #fff;

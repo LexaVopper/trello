@@ -1,15 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FirebaseContext } from '../../FirebaseApi';
 import SingleBoard from '../SingleBoard/SingleBoard';
+import Portal from '../../Modal/Portal';
+import { useForm } from 'react-hook-form';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 function AllBoards() {
   const firebase = React.useContext(FirebaseContext);
-  const allowedBoards = useSelector((state) => state.getUser.user.boards);
+  const allowedBoards = useSelector((state) => state?.getUser?.user?.boards);
+  const { register, handleSubmit } = useForm();
+
+  const [position, setColor] = useState(0);
   const addBoard = () => firebase.addBoard();
+
+  const colors = [
+    'green',
+    'yellow',
+    'red',
+    '#44014C',
+    '#0079bf',
+    '#d29034',
+    '#519839',
+    '#b04632',
+    '#4a443c',
+  ];
+
+  const TodoComponent = {
+    backgroundColor: '#44014C',
+  };
+  const onSubmit = (data) => {};
 
   return (
     <div className='all-boards'>
@@ -34,6 +56,33 @@ function AllBoards() {
           </div>
         </div>
       </div>
+      <Portal>
+        <div className='creating-board create'>
+          <form
+            className='create__name'
+            onSubmit={handleSubmit(onSubmit)}
+            style={{ backgroundColor: colors[position] }}>
+            <input type='text' {...register('boardColor')} placeholder='Добавте заголовок доски' />
+            <span className='create__name-room'>VopperRoom </span>
+            <input type='submit' value='Создать доску' />
+          </form>
+
+          <ul className='create__colors'>
+            {colors.map((color, index) => (
+              <li
+                className='create__block block'
+                key={color + index}
+                style={{ backgroundColor: colors[index] }}>
+                <div className='block__layer' onClick={() => setColor(index)}>
+                  <span>
+                    <FontAwesomeIcon icon={faCheck} className='block__layer--icon' />
+                  </span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Portal>
     </div>
   );
 }

@@ -16,7 +16,7 @@ function Registrarion() {
       .registration(data.mail, data.password)
       .then((data) => {
         firebase.db.ref(`db/users/user/${data.user.uid}`).child('email').set(`${data.user.email}`);
-
+        firebase.addEmailField(data.user.email, data.user.uid);
         history.push('/login');
       })
       .catch((error) => console.log(error));

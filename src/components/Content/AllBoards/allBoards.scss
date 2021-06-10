@@ -81,3 +81,96 @@
     font-weight: bold;
   }
 }
+
+.creating-board {
+}
+
+.create {
+  display: flex;
+  flex-direction: row;
+  &__name {
+    position: relative;
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    background-color: rgb(118, 181, 184);
+
+    border-radius: 5px;
+    padding: 15px 55px 15px 15px;
+    input[type='text'] {
+      width: 226px;
+      border: none;
+      padding: 5px;
+      background: none;
+      font-weight: bold;
+      font-size: 16px;
+
+      &::placeholder {
+        color: #e7d8c3;
+      }
+
+      &:focus,
+      &:hover {
+        outline: none;
+        border-radius: 5px;
+        background: rgba(255, 255, 255, 0.15);
+      }
+    }
+    input[type='submit'] {
+      top: 105px;
+      left: 0;
+      position: absolute;
+      padding: 10px;
+
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    span {
+      margin-left: 5px;
+      font-size: 17px;
+      color: #f8edde;
+    }
+  }
+  &__name-room {
+    margin-top: 10px;
+  }
+  &__colors {
+    width: 100px;
+    height: 96px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    list-style: none;
+    margin: 0 0 0 8px;
+  }
+}
+
+.block {
+  width: 28px;
+  height: 28px;
+  background-color: rgb(247, 243, 243);
+  margin-bottom: 6px;
+  border-radius: 5px;
+
+  &__layer {
+    height: 100%;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &--icon {
+      opacity: 0;
+    }
+    &:hover {
+      background-color: rgba(22, 21, 21, 0.295);
+      color: yellow;
+
+      .block__layer--icon {
+        color: black;
+        opacity: 1;
+      }
+    }
+  }
+}

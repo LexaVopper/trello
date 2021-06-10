@@ -1,20 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Modal from '../Modal/Modal';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faStar, faMinus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faStar, faMinus, faColumns } from '@fortawesome/free-solid-svg-icons';
+import { toggleModalOpen } from '../Modal/openModal';
 
-function Board({ blockRef }) {
-  const [description, openDescr] = useState(false);
-
-  const openModalWindow = () => {
-    !description ? openDescr(true) : openDescr(false);
+function Board() {
+  const dispatch = useDispatch();
+  const currentModalId = useSelector((state) => state?.checkModalOpen?.modalId);
+  const closeModal = () => {
+    dispatch(toggleModalOpen(''));
   };
   return (
-    <Modal refer={blockRef.current}>
+    <Modal
+      target={({ onClick }) => (
+        <div className='button' onClick={onClick}>
+          <FontAwesomeIcon icon={faColumns} className='menu-icon' />
+          <span>Доски</span>
+        </div>
+      )}
+      currentId='boards'>
       <div className='board'>
         <div className='board__input'>
           <input></input>
-          <button className='button'>
+          <button className='button' onClick={() => closeModal()}>
             <FontAwesomeIcon icon={faPlus} className='menu-icon delete' />
           </button>
         </div>

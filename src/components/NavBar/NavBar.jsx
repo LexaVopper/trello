@@ -14,14 +14,12 @@ import { useHistory } from 'react-router-dom';
 
 const NavBar = React.memo(function NavBar() {
   const blockRef = React.useRef(null);
-  const [modal, openModal] = useState(false);
+  const addBoard = React.useRef(null);
+
   const history = useHistory();
 
   const goHome = () => {
     history.push('/home');
-  };
-  const openModalWindow = () => {
-    !modal ? openModal(true) : openModal(false);
   };
 
   return (
@@ -34,10 +32,9 @@ const NavBar = React.memo(function NavBar() {
           <button onClick={() => goHome()} className='button home'>
             <FontAwesomeIcon icon={faHome} className='menu-icon' />
           </button>
-          <button className='button' onClick={() => openModalWindow()}>
-            <FontAwesomeIcon icon={faColumns} className='menu-icon' />
-            <span>Доски</span>
-          </button>
+
+          <Board />
+
           <div className='header-navigation__input'>
             <input></input>
             <span className='search-icon'>
@@ -45,10 +42,11 @@ const NavBar = React.memo(function NavBar() {
             </span>
           </div>
         </div>
-        <div className='header-navigation__logo'>
+        <div className='header-navigation__logo' ref={addBoard}>
           <FontAwesomeIcon icon={faColumns} className='menu-icon' />
           <span>Trello</span>
         </div>
+
         <div className='header-navigation__block2'>
           <button className='button'>
             <FontAwesomeIcon icon={faPlus} className='menu-icon' />
@@ -62,7 +60,6 @@ const NavBar = React.memo(function NavBar() {
           <div className='header-navigation__profile'>А</div>
         </div>
       </div>
-      {modal && <Board blockRef={blockRef} />}
     </div>
   );
 });

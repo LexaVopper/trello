@@ -12,7 +12,7 @@ function Login() {
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    firebase.login(data);
+    firebase.login(data.mail, data.password);
     history.push('/home');
   };
 

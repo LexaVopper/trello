@@ -4,6 +4,9 @@ $buttonHoverColor: #3588b9;
 $mainhover: rgba(9, 30, 66, 0.08);
 $boardColor: rgb(176, 70, 50);
 
+.body {
+  position: relative;
+}
 .wrapper {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva,
     Verdana, sans-serif;
@@ -39,6 +42,7 @@ $boardColor: rgb(176, 70, 50);
 @import 'reset.scss';
 @import '../components/NavBar/nav.scss';
 @import '../components/Modal/modal.scss';
+@import '../components/Modal/portal.scss';
 @import '../components/Board/board.scss';
 @import '../components/Content/AllBoards/allBoards.scss';
 @import '../components/Content/Workspace/workspace.scss';

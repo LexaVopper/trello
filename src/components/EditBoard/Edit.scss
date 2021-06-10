@@ -40,5 +40,49 @@
   margin-right: 4px;
 }
 .invite {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   position: relative;
+  .modal__content {
+    align-items: stretch;
+  }
+  &__text {
+  }
+}
+.invite-form {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  &__error {
+    color: #5e6c84;
+    position: absolute;
+    top: 54%;
+    left: 8px;
+  }
+  &__title {
+    width: 100%;
+    color: #5e6c84;
+    border-bottom: 1px solid grey;
+    margin: 3px;
+  }
+  &__email {
+    padding: 10px;
+    font-size: 15px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 2px solid #dfe1e6;
+    background-color: #fafbfc;
+
+    &:hover {
+      background-color: #ebecf0;
+    }
+  }
+  &__submit {
+    margin-top: 30px;
+  }
 }
