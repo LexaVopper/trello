@@ -32,13 +32,12 @@ class Firebase {
     return this.auth.createUserWithEmailAndPassword(email, password);
   }
 
-  addBoard() {
+  addBoard(name, color) {
     const creator = this.auth.currentUser.uid;
-    const name = 'kek';
     let id = Math.round(Math.random() * 100000);
-
     this.db.ref().child(`db/boards`).child(`${id}`).set({
       name: name,
+      color: color,
       people: {
         creator,
       },
@@ -56,14 +55,6 @@ class Firebase {
 
   sendInvite(creator, boardId) {
     this.db.ref().child(`db/users/user/${creator}/invite`).child(`${boardId}`).set({ id: boardId });
-  }
-
-  deleteCustomer(id) {
-    if (this.auth.currentUser.isAnonymous) return Promise.resolve();
-
-    const currentId = this.auth.currentUser.uid;
-    const customerRef = this.db.ref(`${currentId}/customers/${id}`);
-    return customerRef.remove();
   }
 }
 

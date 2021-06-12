@@ -125,6 +125,9 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      &:disabled {
+        cursor: not-allowed;
+      }
     }
     span {
       margin-left: 5px;
@@ -143,6 +146,14 @@
     justify-content: space-between;
     list-style: none;
     margin: 0 0 0 8px;
+  }
+  &__delete {
+    position: absolute;
+    right: 5px;
+    &.--icon {
+      transform: rotate(45deg);
+      cursor: pointer;
+    }
   }
 }
 
@@ -168,7 +179,13 @@
       color: yellow;
 
       .block__layer--icon {
-        color: black;
+        color: white;
+        opacity: 1;
+      }
+    }
+    &.active {
+      .block__layer--icon {
+        color: white;
         opacity: 1;
       }
     }

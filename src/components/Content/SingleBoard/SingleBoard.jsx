@@ -16,9 +16,7 @@ function SingleBoard({ name, id }) {
 
   return (
     <div className='recently-promoted-board' onClick={() => editBoard()}>
-      <span className='recently-promoted-board__name'>
-        {name} {id}
-      </span>
+      <span className='recently-promoted-board__name'>{name}</span>
       <div className='recently-promoted-board__footer'>
         <FontAwesomeIcon icon={faBell} className='slide-icon' />
       </div>

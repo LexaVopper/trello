@@ -11,4 +11,7 @@
     margin: 48px 0;
     width: auto;
   }
+  &.active {
+    display: none;
+  }
 }
