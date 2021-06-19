@@ -15,11 +15,7 @@ function AllBoards() {
   const [toggleSubmit, setSubmitDisable] = useState(true);
   const [toggleModalWindow, openModal] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const openCloseBoard = () => {
     toggleModalWindow === true ? openModal(false) : openModal(true);
@@ -37,12 +33,10 @@ function AllBoards() {
     '#4a443c',
   ];
 
-  const TodoComponent = {
-    backgroundColor: '#44014C',
-  };
   const allowCreating = (value) => {
     value.trim().length === 0 ? setSubmitDisable(true) : setSubmitDisable(false);
   };
+
   const onSubmit = (data) => {
     firebase.addBoard(data.boardName, colors[position]);
     openCloseBoard();

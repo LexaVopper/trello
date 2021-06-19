@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Modal from '../Modal/Modal';
 import { useForm } from 'react-hook-form';
+import { EditBody } from './EditBody';
 
 const Edit = React.memo(function Edit() {
   const { id } = useParams();
@@ -91,7 +92,7 @@ const Edit = React.memo(function Edit() {
           </button>
         </div>
       </div>
-      <div className='edit__block block'></div>
+      <EditBody></EditBody>
     </section>
   );
 });

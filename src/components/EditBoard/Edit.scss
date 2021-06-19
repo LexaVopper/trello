@@ -86,3 +86,40 @@
     margin-top: 30px;
   }
 }
+.card {
+  width: 200px;
+  min-height: 150px;
+
+  border-radius: 3px;
+  border: 5px solid;
+  display: flex;
+  padding: 10px;
+  align-self: flex-start;
+  align-items: center;
+  margin: 15px;
+  cursor: grab;
+  flex-direction: column;
+
+  &__title {
+    font-weight: bold;
+    padding: 5px;
+  }
+}
+.tasks {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 50px;
+  align-self: center;
+}
+.task {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid black;
+  margin-bottom: 10px;
+}
+.main {
+  display: flex;
+  flex-direction: row;
+  min-height: 90vh;
+}
