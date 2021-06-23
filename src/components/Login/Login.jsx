@@ -3,13 +3,10 @@ import { useForm } from 'react-hook-form';
 import { FirebaseContext } from '../FirebaseApi';
 import { useHistory } from 'react-router-dom';
 
-import { useDispatch } from 'react-redux';
-
 function Login() {
   const firebase = React.useContext(FirebaseContext);
   const { register, handleSubmit } = useForm();
   const history = useHistory();
-  const dispatch = useDispatch();
 
   const onSubmit = (data) => {
     firebase.login(data.mail, data.password);

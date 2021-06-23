@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from '../Modal/Modal';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faStar, faMinus, faColumns } from '@fortawesome/free-solid-svg-icons';
@@ -8,7 +8,6 @@ import { toggleModalOpen } from '../Modal/openModal';
 
 function Board() {
   const dispatch = useDispatch();
-  const currentModalId = useSelector((state) => state?.checkModalOpen?.modalId);
   const closeModal = () => {
     dispatch(toggleModalOpen(''));
   };

@@ -48,6 +48,11 @@ class Firebase {
       .child(`${id}`)
       .set({ id: id, name: name });
   }
+  addColumn(name, boardId) {
+    let id = Math.round(Math.random() * 100000);
+    this.db.ref().child(`db/columns/${id}`).set({ id: id, name: name, board: boardId });
+    this.db.ref().child(`db/boards/${boardId}`).child(`columns/${id}`).set({ id: id });
+  }
 
   addEmailField(email, id) {
     this.db.ref().child(`db/emails`).child(`${id}`).set(`${email}`);

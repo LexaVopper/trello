@@ -1,5 +1,6 @@
 const initialState = {
   page: [],
+  id: null,
   isLoading: false,
   error: false,
 };
@@ -9,7 +10,8 @@ const getBoard = (state = initialState, action) => {
     case 'GET_BOARD':
       return {
         ...state,
-        page: action.payload,
+        id: action.payload.id,
+        page: action.payload.page,
       };
     default:
       return state;

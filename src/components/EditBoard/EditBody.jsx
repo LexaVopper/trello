@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Card } from './Card';
 import { CreateColumn } from './CreateColumn/CreateColomn';
+import { getColumnsId } from './CreateColumn/action';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 export const EditBody = () => {
+  const dispatch = useDispatch();
   const [cardList, setState] = useState({
     tasks: {
       'task-1': { id: 'task-1', content: 'Number 1' },
@@ -30,6 +34,7 @@ export const EditBody = () => {
     },
     columnOrder: ['column-1', 'column-2', 'column-3'],
   });
+  const { id } = useParams();
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
@@ -104,6 +109,9 @@ export const EditBody = () => {
 
     setState(newState);
   };
+  React.useEffect(() => {
+    dispatch(getColumnsId(id));
+  }, []);
 
   return (
     <>

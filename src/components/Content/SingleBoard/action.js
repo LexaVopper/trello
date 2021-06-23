@@ -5,11 +5,14 @@ export const getBoard = (id) => (dispatch) => {
     .database()
     .ref(`db/boards/${id}/`)
     .on('value', function (data) {
-      dispatch(getBoardInfo(data.val()));
+      dispatch(getBoardInfo(data.val(), id));
     });
 };
 
-export const getBoardInfo = (page) => ({
+export const getBoardInfo = (page, id) => ({
   type: 'GET_BOARD',
-  payload: page,
+  payload: {
+    page: page,
+    id: id,
+  },
 });
