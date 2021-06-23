@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Card } from './Card';
+import { CreateColumn } from './CreateColumn/CreateColomn';
 
 export const EditBody = () => {
   const [cardList, setState] = useState({
@@ -18,11 +19,16 @@ export const EditBody = () => {
       },
       'column-2': {
         id: 'column-2',
-        title: 'Sosi',
+        title: 'Ly',
+        taskIds: [],
+      },
+      'column-3': {
+        id: 'column-3',
+        title: 'Ly',
         taskIds: [],
       },
     },
-    columnOrder: ['column-1', 'column-2'],
+    columnOrder: ['column-1', 'column-2', 'column-3'],
   });
 
   const onDragEnd = (result) => {
@@ -100,20 +106,25 @@ export const EditBody = () => {
   };
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable droppableId='all-columns' direction='horizontal' type='column'>
-        {(provided) => (
-          <div className='edit__block main' {...provided.droppableProps} ref={provided.innerRef}>
-            {cardList.columnOrder.map((columnId, index) => {
-              const column = cardList.columns[columnId];
-              const tasks = column.taskIds.map((tasksId) => cardList.tasks[tasksId]);
+    <>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId='all-columns' direction='horizontal' type='column'>
+          {(provided) => (
+            <div className='edit__block main' {...provided.droppableProps} ref={provided.innerRef}>
+              {cardList.columnOrder.map((columnId, index) => {
+                const column = cardList.columns[columnId];
 
-              return <Card key={column.id} column={column} tasks={tasks} index={index} />;
-            })}
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
-    </DragDropContext>
+                const tasks = column.taskIds.map((tasksId) => cardList.tasks[tasksId]);
+
+                return <Card key={column.id} column={column} tasks={tasks} index={index} />;
+              })}
+
+              {provided.placeholder}
+              <CreateColumn />
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
+    </>
   );
 };

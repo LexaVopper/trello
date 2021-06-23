@@ -12,8 +12,7 @@ import { EditBody } from './EditBody';
 
 const Edit = React.memo(function Edit() {
   const { id } = useParams();
-  const { register, handleSubmit } = useForm();
-  const blockRef = React.useRef(null);
+  const { register, handleSubmit } = useForm();  
 
   const dispatch = useDispatch();
   const [toggle, self_Invite] = useState(false);
