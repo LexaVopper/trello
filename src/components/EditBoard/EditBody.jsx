@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Card } from './Card';
 import { CreateColumn } from './CreateColumn/CreateColomn';
-import { getColumnsId } from './CreateColumn/action';
+import { getColumnsId, clearBoardColumns } from './CreateColumn/action';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
@@ -111,6 +111,9 @@ export const EditBody = () => {
   };
   React.useEffect(() => {
     dispatch(getColumnsId(id));
+    return () => {
+      dispatch(clearBoardColumns());
+    };
   }, []);
 
   return (
