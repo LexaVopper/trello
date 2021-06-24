@@ -19,5 +19,5 @@ ReactDOM.render(
       </FirebaseContext.Provider>
     </Provider>
   </React.StrictMode>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { FirebaseContext } from '../FirebaseApi';
 import { useHistory } from 'react-router-dom';
+import { FirebaseContext } from '../FirebaseApi';
 
 function Login() {
   const firebase = React.useContext(FirebaseContext);

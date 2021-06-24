@@ -1,9 +1,14 @@
 import React from 'react';
-import Modal from '../Modal/Modal';
 import { useDispatch } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faStar, faMinus, faColumns } from '@fortawesome/free-solid-svg-icons';
+import {
+  faPlus,
+  faStar,
+  faMinus,
+  faColumns,
+} from '@fortawesome/free-solid-svg-icons';
+import Modal from '../Modal/Modal';
 import { toggleModalOpen } from '../Modal/openModal';
 
 function Board() {
@@ -19,10 +24,11 @@ function Board() {
           <span>Доски</span>
         </div>
       )}
-      currentId='boards'>
+      currentId='boards'
+    >
       <div className='board'>
         <div className='board__input'>
-          <input></input>
+          <input />
           <button className='button' onClick={() => closeModal()}>
             <FontAwesomeIcon icon={faPlus} className='menu-icon delete' />
           </button>
@@ -38,7 +44,8 @@ function Board() {
             <FontAwesomeIcon icon={faMinus} className='mini-icon' />
           </div>
           <div className='section-info__description'>
-            Добавляйте в избранное наиболее важные доски, чтобы они всегда были под рукой.
+            Добавляйте в избранное наиболее важные доски, чтобы они всегда были
+            под рукой.
           </div>
         </div>
 
@@ -53,7 +60,8 @@ function Board() {
             <FontAwesomeIcon icon={faMinus} className='mini-icon' />
           </div>
           <div className='section-info__description'>
-            Добавляйте в избранное наиболее важные доски, чтобы они всегда были под рукой.
+            Добавляйте в избранное наиболее важные доски, чтобы они всегда были
+            под рукой.
           </div>
         </div>
       </div>

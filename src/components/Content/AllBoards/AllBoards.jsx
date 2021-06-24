@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
+import cn from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FirebaseContext } from '../../FirebaseApi';
 import SingleBoard from '../SingleBoard/SingleBoard';
 import Portal from '../../Modal/Portal';
-import { useForm } from 'react-hook-form';
-import cn from 'classnames';
-import { useSelector } from 'react-redux';
 
 function AllBoards() {
   const firebase = React.useContext(FirebaseContext);
@@ -17,9 +17,8 @@ function AllBoards() {
 
   const { register, handleSubmit } = useForm();
 
-  const openCloseBoard = () => {
-    toggleModalWindow === true ? openModal(false) : openModal(true);
-  };
+  const openCloseBoard = () =>
+    toggleModalWindow ? openModal(false) : openModal(true);
 
   const colors = [
     'green',
@@ -33,9 +32,7 @@ function AllBoards() {
     '#4a443c',
   ];
 
-  const allowCreating = (value) => {
-    value.trim().length === 0 ? setSubmitDisable(true) : setSubmitDisable(false);
-  };
+  const allowCreating = (value) => setSubmitDisable(!!value.trim().length);
 
   const onSubmit = (data) => {
     firebase.addBoard(data.boardName, colors[position]);
@@ -53,11 +50,14 @@ function AllBoards() {
         </div>
         <div className='recently-promoted__boards'>
           {allowedBoards &&
-            Object.values(allowedBoards).map((obj, index) => (
+            Object.values(allowedBoards).map((obj) => (
               <SingleBoard key={obj.id} name={obj.name} id={obj.id} />
             ))}
 
-          <div className='recently-promoted-board' onClick={() => openCloseBoard()}>
+          <div
+            className='recently-promoted-board'
+            onClick={() => openCloseBoard()}
+          >
             <span className='recently-promoted-board__name'>Добавить</span>
             <div className='recently-promoted-board__footer'>
               <FontAwesomeIcon icon={faBell} className='slide-icon' />
@@ -70,7 +70,8 @@ function AllBoards() {
           <form
             className='create__name'
             onSubmit={handleSubmit(onSubmit)}
-            style={{ backgroundColor: colors[position] }}>
+            style={{ backgroundColor: colors[position] }}
+          >
             <input
               id='boardName'
               type='text'
@@ -84,9 +85,16 @@ function AllBoards() {
 
             <span className='create__name-room'>VopperRoom </span>
             <div className='create__delete' onClick={() => openCloseBoard()}>
-              <FontAwesomeIcon icon={faPlus} className='create__delete --icon' />
+              <FontAwesomeIcon
+                icon={faPlus}
+                className='create__delete --icon'
+              />
             </div>
-            <input type='submit' value='Создать доску' disabled={toggleSubmit} />
+            <input
+              type='submit'
+              value='Создать доску'
+              disabled={toggleSubmit}
+            />
           </form>
 
           <ul className='create__colors'>
@@ -94,12 +102,17 @@ function AllBoards() {
               <li
                 className='create__block block'
                 key={color + index}
-                style={{ backgroundColor: colors[index] }}>
+                style={{ backgroundColor: colors[index] }}
+              >
                 <div
                   className={cn('block__layer', { active: index === position })}
-                  onClick={() => setColor(index)}>
+                  onClick={() => setColor(index)}
+                >
                   <span>
-                    <FontAwesomeIcon icon={faCheck} className='block__layer--icon' />
+                    <FontAwesomeIcon
+                      icon={faCheck}
+                      className='block__layer--icon'
+                    />
                   </span>
                 </div>
               </li>

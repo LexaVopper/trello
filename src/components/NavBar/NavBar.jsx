@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faLandmark,
@@ -10,7 +11,6 @@ import {
   faSearch,
 } from '@fortawesome/free-solid-svg-icons';
 import Board from '../Board/Board';
-import { useHistory } from 'react-router-dom';
 
 const NavBar = React.memo(function NavBar() {
   const blockRef = React.useRef(null);
@@ -36,7 +36,7 @@ const NavBar = React.memo(function NavBar() {
           <Board />
 
           <div className='header-navigation__input'>
-            <input></input>
+            <input type='text' />
             <span className='search-icon'>
               <FontAwesomeIcon icon={faSearch} className='menu-icon' />
             </span>

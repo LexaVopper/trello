@@ -10,7 +10,7 @@ function Portal({ children, classModal }) {
       </div>
     </div>,
 
-    document.body,
+    document.body
   );
 }
 

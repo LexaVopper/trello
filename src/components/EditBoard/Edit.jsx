@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faColumns } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
 
 import { getUserIdByEmail } from './invite';
-import { useDispatch, useSelector } from 'react-redux';
 
 import Modal from '../Modal/Modal';
-import { useForm } from 'react-hook-form';
 import { EditBody } from './EditBody';
 import { getBoard } from '../Content/SingleBoard/action';
 
@@ -70,17 +70,31 @@ const Edit = React.memo(function Edit() {
                       <span className='invite__text'>Пригласить</span>
                     </span>
                   )}
-                  currentId='Invite'>
-                  <form onSubmit={handleSubmit(onSubmit)} className='invite-form'>
-                    <span className='invite-form__title'>Пригласить на доску</span>
+                  currentId='Invite'
+                >
+                  <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className='invite-form'
+                  >
+                    <span className='invite-form__title'>
+                      Пригласить на доску
+                    </span>
 
                     <input
                       {...register('user')}
                       placeholder='mail'
                       className='invite-form__email'
                     />
-                    {toggle && <span className='invite-form__error'>Нельзя отправить себе</span>}
-                    {emailNotFound && <span className='invite-form__error'>Такой почты нет</span>}
+                    {toggle && (
+                      <span className='invite-form__error'>
+                        Нельзя отправить себе
+                      </span>
+                    )}
+                    {emailNotFound && (
+                      <span className='invite-form__error'>
+                        Такой почты нет
+                      </span>
+                    )}
                     <input type='submit' className='invite-form__submit' />
                   </form>
                 </Modal>
@@ -97,7 +111,7 @@ const Edit = React.memo(function Edit() {
               </button>
             </div>
           </div>
-          <EditBody></EditBody>
+          <EditBody />
         </>
       ) : (
         <div>Такой страницы нет</div>

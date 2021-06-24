@@ -1,0 +1,30 @@
+extends:
+  - react-app
+  - airbnb
+  - plugin:jsx-a11y/recommended
+  - prettier
+  - prettier/prettier
+plugins:
+  - jsx-a11y
+  - prettier
+rules:
+  semi: 1
+  camelcase: 0
+  react/prop-types: 0
+  react/button-has-type: 0
+
+  react/no-array-index-key: 0
+  import/prefer-default-export: 0
+  react/jsx-props-no-spreading: 0
+  jsx-a11y/click-events-have-key-events: 0
+  jsx-a11y/no-static-element-interactions: 0
+  import/no-cycle: 0
+  react/jsx-filename-extension:
+    - 1
+    - extensions:
+        - '.js'
+        - '.jsx'
+  prettier/prettier:
+    - error
+    - semi: true
+      endOfLine: 'auto'

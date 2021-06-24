@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Card } from './Card';
 import { CreateColumn } from './CreateColumn/CreateColomn';
 import { getColumnsId, clearBoardColumns } from './CreateColumn/action';
-import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
 
 export const EditBody = () => {
   const dispatch = useDispatch();
@@ -42,7 +42,10 @@ export const EditBody = () => {
     if (!destination) {
       return;
     }
-    if (destination.droppableId === source.droppableId && destination.index === source.index) {
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
       return;
     }
 
@@ -62,7 +65,7 @@ export const EditBody = () => {
     const start = cardList.columns[source.droppableId];
     const finish = cardList.columns[destination.droppableId];
 
-    //In one list
+    // In one list
     if (start === finish) {
       const newTaskIds = Array.from(start.taskIds);
       newTaskIds.splice(source.index, 1);
@@ -119,15 +122,32 @@ export const EditBody = () => {
   return (
     <>
       <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId='all-columns' direction='horizontal' type='column'>
+        <Droppable
+          droppableId='all-columns'
+          direction='horizontal'
+          type='column'
+        >
           {(provided) => (
-            <div className='edit__block main' {...provided.droppableProps} ref={provided.innerRef}>
+            <div
+              className='edit__block main'
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
               {cardList.columnOrder.map((columnId, index) => {
                 const column = cardList.columns[columnId];
 
-                const tasks = column.taskIds.map((tasksId) => cardList.tasks[tasksId]);
+                const tasks = column.taskIds.map(
+                  (tasksId) => cardList.tasks[tasksId]
+                );
 
-                return <Card key={column.id} column={column} tasks={tasks} index={index} />;
+                return (
+                  <Card
+                    key={column.id}
+                    column={column}
+                    tasks={tasks}
+                    index={index}
+                  />
+                );
               })}
 
               {provided.placeholder}

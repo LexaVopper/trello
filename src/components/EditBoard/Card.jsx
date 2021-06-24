@@ -7,18 +7,26 @@ export const Card = ({ column, tasks, index }) => {
     <>
       <Draggable draggableId={column.id} index={index}>
         {(provided) => (
-          <div className='card' ref={provided.innerRef} {...provided.draggableProps}>
+          <div
+            className='card'
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+          >
             <h1 className='card__title' {...provided.dragHandleProps}>
               {column.title}
             </h1>
             <Droppable droppableId={column.id} type='task'>
-              {(provided) => (
-                <div className='tasks' ref={provided.innerRef} {...provided.droppableProps}>
-                  {tasks.map((task, index) => (
-                    <Task key={task.id} task={task} index={index} />
+              {(provider) => (
+                <div
+                  className='tasks'
+                  ref={provider.innerRef}
+                  {...provider.droppableProps}
+                >
+                  {tasks.map((task, taskIndex) => (
+                    <Task key={task.id} task={task} index={taskIndex} />
                   ))}
 
-                  {provided.placeholder}
+                  {provider.placeholder}
                 </div>
               )}
             </Droppable>

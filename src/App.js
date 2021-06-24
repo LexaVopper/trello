@@ -1,10 +1,10 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import AllBoards from './components/Content/AllBoards/AllBoards';
 import Workspace from './components/Content/Workspace/Workspace';
-import { Route } from 'react-router-dom';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { FirebaseContext } from './components/FirebaseApi';
-import { useDispatch } from 'react-redux';
 import { getUser } from './components/Login/action';
 
 import NavBar from './components/NavBar/NavBar';
@@ -19,8 +19,8 @@ function App() {
   const [user, loading] = useAuthState(firebase.auth);
 
   React.useEffect(() => {
-    let id = user?.uid;
-    id && dispatch(getUser(id));
+    const id = user?.uid;
+    return id && dispatch(getUser(id));
   }, [user]);
 
   return loading ? (

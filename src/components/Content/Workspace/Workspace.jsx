@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faColumns, faPlus, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
+import {
+  faColumns,
+  faPlus,
+  faSortUp,
+  faSortDown,
+} from '@fortawesome/free-solid-svg-icons';
 import cn from 'classnames';
 
 function Workspace() {
   const [listUpDown, setUpDown] = useState(false);
 
-  const toggleList = () => {
-    !listUpDown ? setUpDown(true) : setUpDown(false);
-  };
-
+  const toggleList = () => (!listUpDown ? setUpDown(true) : setUpDown(false));
   return (
     <section className='workspace'>
       <div className='workspace__header'>

@@ -27,17 +27,16 @@ class Firebase {
     return this.auth.signOut();
   }
 
-  //firebase.database().ref(`users`).set('www'); Изменить
   registration(email, password) {
     return this.auth.createUserWithEmailAndPassword(email, password);
   }
 
   addBoard(name, color) {
     const creator = this.auth.currentUser.uid;
-    let id = Math.round(Math.random() * 100000);
+    const id = Math.round(Math.random() * 100000);
     this.db.ref().child(`db/boards`).child(`${id}`).set({
-      name: name,
-      color: color,
+      name,
+      color,
       people: {
         creator,
       },
@@ -46,12 +45,22 @@ class Firebase {
       .ref()
       .child(`db/users/user/${creator}/boards`)
       .child(`${id}`)
-      .set({ id: id, name: name });
+      .set({ id, name });
   }
-  addColumn(name, boardId) {
-    let id = Math.round(Math.random() * 100000);
-    this.db.ref().child(`db/columns/${id}`).set({ id: id, name: name, board: boardId });
-    this.db.ref().child(`db/boards/${boardId}`).child(`columns/${id}`).set({ id: id });
+
+  addColumn(name, boardId, columnPosition) {
+    const id = Math.round(Math.random() * 100000);
+
+    this.db
+      .ref()
+      .child(`db/columns/${id}`)
+      .set({ id, name, board: boardId, position: columnPosition });
+
+    this.db
+      .ref()
+      .child(`db/boards/${boardId}`)
+      .child(`columns/${id}`)
+      .set({ id });
   }
 
   addEmailField(email, id) {
@@ -59,7 +68,11 @@ class Firebase {
   }
 
   sendInvite(creator, boardId) {
-    this.db.ref().child(`db/users/user/${creator}/invite`).child(`${boardId}`).set({ id: boardId });
+    this.db
+      .ref()
+      .child(`db/users/user/${creator}/invite`)
+      .child(`${boardId}`)
+      .set({ id: boardId });
   }
 }
 
