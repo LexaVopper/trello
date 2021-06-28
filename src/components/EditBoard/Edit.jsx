@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faColumns } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
+import { getColumnsId } from './CreateColumn/action';
 
 import { getUserIdByEmail } from './invite';
 
@@ -23,6 +24,7 @@ const Edit = React.memo(function Edit() {
 
   useEffect(() => {
     dispatch(getBoard(id));
+    dispatch(getColumnsId(id));
   }, []);
 
   const onSubmit = (data) => {

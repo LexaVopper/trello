@@ -1,13 +1,17 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Card } from './Card';
 import { CreateColumn } from './CreateColumn/CreateColomn';
-import { getColumnsId, clearBoardColumns } from './CreateColumn/action';
+import { clearBoardColumns } from './CreateColumn/action';
 
-export const EditBody = () => {
+export const EditBody = React.memo(() => {
   const dispatch = useDispatch();
+  const col = useSelector((state) => state.getBoardBody.columns);
+  const listOfCols = useSelector((state) => state.getBoardBody.columnOrder);
+  const loader = useSelector((state) => state.getBoardBody.isLoading);
+
   const [cardList, setState] = useState({
     tasks: {
       'task-1': { id: 'task-1', content: 'Number 1' },
@@ -34,7 +38,6 @@ export const EditBody = () => {
     },
     columnOrder: ['column-1', 'column-2', 'column-3'],
   });
-  const { id } = useParams();
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
@@ -113,7 +116,6 @@ export const EditBody = () => {
     setState(newState);
   };
   React.useEffect(() => {
-    dispatch(getColumnsId(id));
     return () => {
       dispatch(clearBoardColumns());
     };
@@ -121,19 +123,37 @@ export const EditBody = () => {
 
   return (
     <>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable
-          droppableId='all-columns'
-          direction='horizontal'
-          type='column'
-        >
-          {(provided) => (
-            <div
-              className='edit__block main'
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-              {cardList.columnOrder.map((columnId, index) => {
+      {!loader && (
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable
+            droppableId='all-columns'
+            direction='horizontal'
+            type='column'
+          >
+            {(provided) => (
+              <div
+                className='edit__block main'
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                {cardList.columnOrder.map((columnId, index) => {
+                  const column = cardList.columns[columnId];
+
+                  const tasks = column.taskIds.map(
+                    (tasksId) => cardList.tasks[tasksId]
+                  );
+
+                  return (
+                    <Card
+                      key={column.id}
+                      column={column}
+                      tasks={tasks}
+                      index={index}
+                    />
+                  );
+                })}
+                {/* {listOfCols.map((columnId, index) => {
+                console.log(columnId);
                 const column = cardList.columns[columnId];
 
                 const tasks = column.taskIds.map(
@@ -148,14 +168,15 @@ export const EditBody = () => {
                     index={index}
                   />
                 );
-              })}
+              })} */}
 
-              {provided.placeholder}
-              <CreateColumn />
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
+                {provided.placeholder}
+                <CreateColumn />
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+      )}
     </>
   );
-};
+});
