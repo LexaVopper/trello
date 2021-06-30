@@ -32,7 +32,7 @@ function AllBoards() {
     '#4a443c',
   ];
 
-  const allowCreating = (value) => setSubmitDisable(!!value.trim().length);
+  const allowCreating = (value) => setSubmitDisable(!value.trim().length);
 
   const onSubmit = (data) => {
     firebase.addBoard(data.boardName, colors[position]);

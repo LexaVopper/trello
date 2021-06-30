@@ -1,9 +1,10 @@
 const initialState = {
   columns: {},
   tasks: [],
-  columnOrder: [],
+  columnOrder: {},
   error: false,
   isLoading: false,
+  rerender: false,
 };
 
 const getBoardBody = (state = initialState, action) => {
@@ -12,6 +13,7 @@ const getBoardBody = (state = initialState, action) => {
       return {
         ...state,
         columns: {},
+        columnOrder: {},
       };
     case 'GET_BOARD_COLUMNS':
       return {
@@ -24,6 +26,35 @@ const getBoardBody = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
+      };
+    case 'CHANGE_COLOMNS_POSITION':
+      return {
+        ...state,
+        columns: {
+          [action.payload.firstColomn]: {
+            ...state.columns[action.payload.firstColomn],
+            position: action.payload.fPos,
+          },
+          [action.payload.secondColomn]: {
+            ...state.columns[action.payload.secondColomn],
+            position: action.payload.sPos,
+          },
+        },
+        columnOrder: {
+          [action.payload.firstColomn]: {
+            ...state.columns[action.payload.firstColomn],
+            position: action.payload.fPos,
+          },
+          [action.payload.secondColomn]: {
+            ...state.columns[action.payload.secondColomn],
+            position: action.payload.sPos,
+          },
+        },
+      };
+    case 'GET_RERENDER':
+      return {
+        ...state,
+        rerender: action.payload,
       };
     default:
       return state;

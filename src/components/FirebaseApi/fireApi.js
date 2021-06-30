@@ -48,19 +48,30 @@ class Firebase {
       .set({ id, name });
   }
 
-  addColumn(name, boardId, columnPosition) {
+  addColumn(title, boardId, columnPosition) {
     const id = Math.round(Math.random() * 100000);
 
     this.db
       .ref()
       .child(`db/columns/${id}`)
-      .set({ id, name, board: boardId, position: columnPosition });
+      .set({ id, title, board: boardId, position: columnPosition });
 
     this.db
       .ref()
       .child(`db/boards/${boardId}`)
       .child(`columns/${id}`)
       .set({ id });
+  }
+
+  changeColomns(firstColomn, secondColomn, f_Position, s_Position) {
+    this.db
+      .ref()
+      .child(`db/columns/${secondColomn}`)
+      .update({ position: +s_Position });
+    this.db
+      .ref()
+      .child(`db/columns/${firstColomn}`)
+      .update({ position: +f_Position });
   }
 
   addEmailField(email, id) {

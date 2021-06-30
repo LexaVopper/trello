@@ -1,11 +1,12 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { Task } from './Task';
 
-export const Card = ({ column, tasks, index }) => {
+export const Card = ({ column, tasks, id, index }) => {
   return (
     <>
-      <Draggable draggableId={column.id} index={index}>
+      <Draggable draggableId={id} index={index}>
         {(provided) => (
           <div
             className='card'
@@ -13,18 +14,19 @@ export const Card = ({ column, tasks, index }) => {
             {...provided.draggableProps}
           >
             <h1 className='card__title' {...provided.dragHandleProps}>
-              {column.title}
+              {column.title} {id}
             </h1>
-            <Droppable droppableId={column.id} type='task'>
+            <Droppable droppableId={id} type='task'>
               {(provider) => (
                 <div
                   className='tasks'
                   ref={provider.innerRef}
                   {...provider.droppableProps}
                 >
-                  {tasks.map((task, taskIndex) => (
-                    <Task key={task.id} task={task} index={taskIndex} />
-                  ))}
+                  {/* {tasks &&
+                    tasks.map((task, taskIndex) => (
+                      <Task key={task.id} task={task} index={taskIndex} />
+                    ))} */}
 
                   {provider.placeholder}
                 </div>

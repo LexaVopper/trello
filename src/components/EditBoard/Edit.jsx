@@ -21,11 +21,12 @@ const Edit = React.memo(function Edit() {
   const emailNotFound = useSelector((state) => state.checkEmail?.error);
   const userEmail = useSelector((state) => state.getUser?.user?.email);
   const page = useSelector((state) => state.getBoard?.page);
+  const rerender = useSelector((state) => state.getBoardBody.rerender);
 
   useEffect(() => {
     dispatch(getBoard(id));
     dispatch(getColumnsId(id));
-  }, []);
+  }, [rerender]);
 
   const onSubmit = (data) => {
     if (data.user === userEmail) {
