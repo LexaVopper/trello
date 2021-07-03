@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { Task } from './Task';
 
 export const Card = ({ column, tasks, id, index }) => {
@@ -14,7 +16,10 @@ export const Card = ({ column, tasks, id, index }) => {
             {...provided.draggableProps}
           >
             <h1 className='card__title' {...provided.dragHandleProps}>
-              {column.title} {id}
+              {column.title}{' '}
+              <button className='button'>
+                <FontAwesomeIcon icon={faHome} className='menu-icon' />
+              </button>
             </h1>
             <Droppable droppableId={id} type='task'>
               {(provider) => (

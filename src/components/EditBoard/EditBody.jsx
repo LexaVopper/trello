@@ -121,12 +121,6 @@ export const EditBody = React.memo(() => {
     };
   }, []);
 
-  React.useEffect(() => {
-    return () => {
-      dispatch(clearBoardColumns());
-    };
-  }, []);
-
   return (
     <>
       <DragDropContext onDragEnd={onDragEnd}>

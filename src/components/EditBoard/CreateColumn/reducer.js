@@ -31,6 +31,7 @@ const getBoardBody = (state = initialState, action) => {
       return {
         ...state,
         columns: {
+          ...state.columns,
           [action.payload.firstColomn]: {
             ...state.columns[action.payload.firstColomn],
             position: action.payload.fPos,
@@ -41,12 +42,13 @@ const getBoardBody = (state = initialState, action) => {
           },
         },
         columnOrder: {
+          ...state.columnOrder,
           [action.payload.firstColomn]: {
-            ...state.columns[action.payload.firstColomn],
+            ...state.columnOrder[action.payload.firstColomn],
             position: action.payload.fPos,
           },
           [action.payload.secondColomn]: {
-            ...state.columns[action.payload.secondColomn],
+            ...state.columnOrder[action.payload.secondColomn],
             position: action.payload.sPos,
           },
         },

@@ -4,12 +4,13 @@ $buttonHoverColor: #3588b9;
 $mainhover: rgba(9, 30, 66, 0.08);
 $boardColor: rgb(176, 70, 50);
 
-.body {
+body {
   position: relative;
+  overflow-y: hidden;
 }
 .wrapper {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva,
-    Verdana, sans-serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .container {
   display: flex;

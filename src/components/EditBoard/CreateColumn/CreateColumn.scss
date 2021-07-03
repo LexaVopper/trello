@@ -1,12 +1,8 @@
 .card-creating {
-  margin: 15px;
+  margin-top: 5px;
   display: block;
   min-width: 264px;
-  padding: 5px;
-
-  &.creating {
-    background-color: #ebecf0;
-  }
+  padding: 6px;
 
   &__input {
     background-color: #fff;
@@ -21,6 +17,10 @@
     &:focus {
       outline: none;
     }
+  }
+  .button {
+    background-color: #ffffff3d;
+    height: 40px;
   }
 }
 .buttons {

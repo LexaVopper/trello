@@ -22,6 +22,7 @@ const Edit = React.memo(function Edit() {
   const userEmail = useSelector((state) => state.getUser?.user?.email);
   const page = useSelector((state) => state.getBoard?.page);
   const rerender = useSelector((state) => state.getBoardBody.rerender);
+  const boardColor = useSelector((state) => state.getBoard.page.color);
 
   useEffect(() => {
     dispatch(getBoard(id));
@@ -38,7 +39,7 @@ const Edit = React.memo(function Edit() {
   };
 
   return (
-    <section className='edit'>
+    <section className='edit' style={{ backgroundColor: boardColor }}>
       {page ? (
         <>
           <div className='edit__nav nav'>
