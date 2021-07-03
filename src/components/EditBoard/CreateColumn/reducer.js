@@ -27,6 +27,11 @@ const getBoardBody = (state = initialState, action) => {
         ...state,
         isLoading: true,
       };
+    case 'TURNOFF_BOARD_LOADING':
+      return {
+        ...state,
+        isLoading: false,
+      };
     case 'CHANGE_COLOMNS_POSITION':
       return {
         ...state,

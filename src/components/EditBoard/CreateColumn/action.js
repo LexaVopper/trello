@@ -9,7 +9,9 @@ export const getBoardColumns = (columns, columnOrders) => ({
 export const setBoardLoading = () => ({
   type: 'SET_BOARD_LOADING',
 });
-
+export const turnOFFBoardLoading = () => ({
+  type: 'TURNOFF_BOARD_LOADING',
+});
 export const clearBoardColumns = () => ({
   type: 'CLEAR_BOARD_COLUMNS',
 });
@@ -42,6 +44,7 @@ export const getColumnsId = (id) => async (dispatch) => {
 
     dispatch(getBoardColumns(objectColumns, columnOrder));
   }
+  dispatch(turnOFFBoardLoading());
 };
 
 export const changeColomns =

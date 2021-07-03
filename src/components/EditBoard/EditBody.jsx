@@ -4,20 +4,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Card } from './Card';
 import { CreateColumn } from './CreateColumn/CreateColomn';
-import {
-  clearBoardColumns,
-  changeColomns,
-  getRerender,
-} from './CreateColumn/action';
+import { clearBoardColumns, changeColomns } from './CreateColumn/action';
 import { sortByAcs } from './CreateColumn/utils';
 
 export const EditBody = React.memo(() => {
   const dispatch = useDispatch();
   const col = useSelector((state) => state.getBoardBody.columns);
   const listOfCols = useSelector((state) => state.getBoardBody.columnOrder);
-  const loader = useSelector((state) => state.getBoardBody.isLoading);
+
   const sortedListOfCols = sortByAcs(listOfCols);
-  const rerender = useSelector((state) => state.getBoardBody.rerender);
 
   const [cardList, setState] = useState({
     tasks: {

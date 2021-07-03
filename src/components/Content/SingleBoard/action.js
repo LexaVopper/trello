@@ -7,12 +7,20 @@ export const getBoardInfo = (page, id) => ({
     id,
   },
 });
+export const setError = () => ({
+  type: 'SET_ERROR',
+});
+export const setLoading = () => ({
+  type: 'SET_LOADING',
+});
 
-export const getBoard = (id) => (dispatch) => {
-  firebase
-    .database()
-    .ref(`db/boards/${id}/`)
-    .on('value', (data) => {
-      dispatch(getBoardInfo(data.val(), id));
-    });
+export const getBoard = (id) => async (dispatch) => {
+  dispatch(setLoading());
+  const data = await firebase.database().ref(`db/boards/${id}/`).once('value');
+
+  if (data.val()) {
+    dispatch(getBoardInfo(data.val(), id));
+  } else {
+    dispatch(setError());
+  }
 };
