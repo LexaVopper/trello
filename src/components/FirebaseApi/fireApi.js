@@ -50,27 +50,35 @@ class Firebase {
 
   addColumn(title, boardId, columnPosition) {
     const id = Math.round(Math.random() * 100000);
-
-    this.db
-      .ref()
-      .child(`db/columns/${id}`)
-      .set({ id, title, board: boardId, position: columnPosition });
-
     this.db
       .ref()
       .child(`db/boards/${boardId}`)
       .child(`columns/${id}`)
+      .set({ id, title, board: boardId, position: columnPosition });
+  }
+
+  addTask(title, columnId, boardId, columnPosition) {
+    const id = Math.round(Math.random() * 100000);
+
+    this.db
+      .ref()
+      .child(`db/boards/${boardId}/task/${id}`)
+      .set({ id, title, position: columnPosition });
+
+    this.db
+      .ref()
+      .child(`db/boards/${boardId}/columns/${columnId}/tasksId/${id}`)
       .set({ id });
   }
 
-  changeColomns(firstColomn, secondColomn, f_Position, s_Position) {
+  changeColomns(firstColomn, secondColomn, f_Position, s_Position, boardId) {
     this.db
       .ref()
-      .child(`db/columns/${secondColomn}`)
+      .child(`db/boards/${boardId}/columns/${secondColomn}`)
       .update({ position: +s_Position });
     this.db
       .ref()
-      .child(`db/columns/${firstColomn}`)
+      .child(`db/boards/${boardId}/columns/${firstColomn}`)
       .update({ position: +f_Position });
   }
 

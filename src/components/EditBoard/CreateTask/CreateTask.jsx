@@ -1,59 +1,70 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import cn from 'classnames';
 import { useForm } from 'react-hook-form';
-import { getRerender } from '../../Content/SingleBoard/action';
-import { FirebaseContext } from '../../FirebaseApi';
 
-export const CreateColumn = () => {
+import { FirebaseContext } from '../../FirebaseApi';
+import { getRerender } from '../../Content/SingleBoard/action';
+
+export default function CreateTask({ colomnId }) {
   const dispatch = useDispatch();
   const firebase = React.useContext(FirebaseContext);
   const { register, handleSubmit } = useForm();
-  const { id } = useParams();
-  const columns = useSelector((state) => state.getBoard?.columns);
+  const boardId = useSelector((state) => state.getBoard?.id);
   const rerender = useSelector((state) => state.getBoard?.rerender);
 
-  const colomnPosition = Object.keys(columns)?.length;
+  const taskIds = useSelector(
+    (state) => state.getBoard?.columns[colomnId]?.tasksId
+  );
+  let taskPosition;
+  if (!taskIds) {
+    taskPosition = 0;
+  } else {
+    taskPosition = Object.keys(taskIds).length;
+  }
+
   const [active, setActive] = useState(false);
 
   const onSubmit = (data) => {
-    firebase.addColumn(data.colomnTitle, id, colomnPosition);
+    firebase.addTask(data.taskTitle, colomnId, boardId, taskPosition);
     if (rerender) {
       dispatch(getRerender(false));
     } else {
       dispatch(getRerender(true));
     }
+    setActive(false);
   };
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className={cn('card-creating', { active: register === false })}
+      className={cn('task-creating', {
+        active: register === false,
+      })}
     >
       {!active ? (
         <button className='button' onClick={() => setActive(true)}>
           <FontAwesomeIcon icon={faPlus} className='menu-icon' />
-          <span>Добавьте еще одну колонку</span>
+          <span>Добавьте карточку</span>
         </button>
       ) : (
         <>
-          <input
-            {...register('colomnTitle', {
+          <textarea
+            {...register('taskTitle', {
               required: true,
               pattern: { value: /\S/ },
             })}
-            className='card-creating__input'
+            className='task-creating__input vertical'
           />
-          <div className='card-creating buttons'>
+          <div className='task-creating buttons'>
             <input
               type='submit'
               className='buttons__add'
-              value='Добавить список'
+              value='Добавить карточку'
             />
             <button
               className='buttons__delete'
@@ -66,4 +77,4 @@ export const CreateColumn = () => {
       )}
     </form>
   );
-};
+}

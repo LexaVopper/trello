@@ -123,14 +123,15 @@
 .tasks {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 250px;
   min-height: 50px;
-  align-self: center;
+  align-self: flex-start;
 }
 .task {
   padding: 8px;
   border-radius: 5px;
   border: 1px solid black;
+  min-height: 25px;
   margin-bottom: 10px;
 }
 .main {

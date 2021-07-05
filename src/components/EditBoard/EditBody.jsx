@@ -2,15 +2,26 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { useParams } from 'react-router-dom';
 import { Card } from './Card';
 import { CreateColumn } from './CreateColumn/CreateColomn';
-import { clearBoardColumns, changeColomns } from './CreateColumn/action';
-import { sortByAcs } from './CreateColumn/utils';
+import {
+  clearBoardColumns,
+  changeColomns,
+} from '../Content/SingleBoard/action';
+
+import { sortByAcs, getTasksAndSort } from './utils';
 
 export const EditBody = React.memo(() => {
+  const { id } = useParams();
+
   const dispatch = useDispatch();
-  const col = useSelector((state) => state.getBoardBody.columns);
-  const listOfCols = useSelector((state) => state.getBoardBody.columnOrder);
+  const col = useSelector((state) => state.getBoard?.columns);
+  const listOfCols = useSelector((state) => state.getBoard?.columnOrder);
+  let listTasks = useSelector((state) => state.getBoard?.page?.task);
+  if (!listTasks) {
+    listTasks = [];
+  }
 
   const sortedListOfCols = sortByAcs(listOfCols);
 
@@ -62,7 +73,7 @@ export const EditBody = React.memo(() => {
       newColumnOrder.splice(destination.index, 0, listOfCols[draggableId]);
 
       dispatch(
-        changeColomns(secondEllementId, draggableId, positionF, positionS)
+        changeColomns(secondEllementId, draggableId, positionF, positionS, id)
       );
     }
 
@@ -132,30 +143,20 @@ export const EditBody = React.memo(() => {
             >
               {sortedListOfCols.map((columnId, index) => {
                 const column = col[columnId.id];
+                const tasks = getTasksAndSort(column, listTasks);
+
                 return (
                   column && (
                     <Card
                       key={column.id}
                       column={column}
+                      tasks={tasks}
                       id={String(column.id)}
                       index={index}
                     />
                   )
                 );
               })}
-
-              {/* {cardList.columnOrder.map((columnId, index) => {
-                  const column = cardList.columns[columnId];
-
-                  return (
-                    <Card
-                      key={column.id}
-                      id={String(column.id)}
-                      column={column}
-                      index={index}
-                    />
-                  );
-                })} */}
 
               {provided.placeholder}
               <CreateColumn />
