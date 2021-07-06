@@ -18,10 +18,7 @@ export const EditBody = React.memo(() => {
   const dispatch = useDispatch();
   const col = useSelector((state) => state.getBoard?.columns);
   const listOfCols = useSelector((state) => state.getBoard?.columnOrder);
-  let listTasks = useSelector((state) => state.getBoard?.page?.task);
-  if (!listTasks) {
-    listTasks = [];
-  }
+  const listTasks = useSelector((state) => state.getBoard?.page?.task);
 
   const sortedListOfCols = sortByAcs(listOfCols);
 
@@ -71,17 +68,19 @@ export const EditBody = React.memo(() => {
 
       newColumnOrder.splice(source.index, 1);
       newColumnOrder.splice(destination.index, 0, listOfCols[draggableId]);
-
+      console.log(listOfCols, draggableId);
       dispatch(
         changeColomns(secondEllementId, draggableId, positionF, positionS, id)
       );
     }
 
-    // const start = cardList.columns[source.droppableId];
-    // const finish = cardList.columns[destination.droppableId];
+    const start = col[source.droppableId];
+    const finish = col[destination.droppableId];
+
     // // In one list
     // if (start === finish) {
-    //   const newTaskIds = Array.from(start.taskIds);
+    //   const newTaskIds = Array.from(start.tasksId);
+    //   console.log(start, newTaskIds);
     //   newTaskIds.splice(source.index, 1);
     //   newTaskIds.splice(destination.index, 0, draggableId);
     //   const newColumn = {
@@ -96,7 +95,6 @@ export const EditBody = React.memo(() => {
     //     },
     //   };
     //   setState(newState);
-    //   return;
     // }
     // const startTaskIds = Array.from(start.taskIds);
     // startTaskIds.splice(source.index, 1);
@@ -123,7 +121,7 @@ export const EditBody = React.memo(() => {
 
   React.useEffect(() => {
     return () => {
-      dispatch(clearBoardColumns());
+      // dispatch(clearBoardColumns());
     };
   }, []);
 

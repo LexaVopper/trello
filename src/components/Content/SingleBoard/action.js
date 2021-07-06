@@ -1,12 +1,13 @@
 import firebase from '../../FirebaseApi/fireApi';
 import { getEachColomn } from './utils';
 
-export const getBoardInfo = (page, id, columnOrder) => ({
+export const getBoardInfo = (page, id, columnOrder, colomnTasks) => ({
   type: 'GET_BOARD',
   payload: {
     page,
     id,
     columnOrder,
+    colomnTasks,
   },
 });
 
@@ -43,9 +44,9 @@ export const getBoard = (id) => async (dispatch) => {
   const data = await firebase.db.ref(`db/boards/${id}/`).once('value');
 
   if (data.val()) {
-    const { columnOrder } = getEachColomn(data.val().columns);
+    const { columnOrder, colomnTasks } = getEachColomn(data.val());
 
-    dispatch(getBoardInfo(data.val(), id, columnOrder));
+    dispatch(getBoardInfo(data.val(), id, columnOrder, colomnTasks));
   } else {
     dispatch(setError());
   }

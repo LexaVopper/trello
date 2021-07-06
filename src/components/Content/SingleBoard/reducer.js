@@ -1,5 +1,5 @@
 const initialState = {
-  page: {},
+  page: { task: {} },
   columns: {},
   columnOrder: {},
   id: null,
@@ -11,10 +11,17 @@ const initialState = {
 const getBoard = (state = initialState, action) => {
   switch (action.type) {
     case 'GET_BOARD':
+      console.log(action.payload.colomnTasks);
       return {
         ...state,
         id: action.payload.id,
-        page: action.payload.page,
+        page: {
+          ...action.payload.page,
+          columns: {
+            ...action.payload.page.columns,
+            ...action.payload.colomnTasks,
+          },
+        },
         columns: { ...action.payload.page.columns },
         columnOrder: action.payload.columnOrder,
         error: false,

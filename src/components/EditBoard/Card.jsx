@@ -7,7 +7,6 @@ import { Task } from './Task';
 import CreateTask from './CreateTask/CreateTask';
 
 export const Card = ({ column, tasks, id, index }) => {
-  console.log(tasks);
   return (
     <>
       <Draggable draggableId={id} index={index}>
