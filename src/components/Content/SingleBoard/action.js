@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import firebase from '../../FirebaseApi/fireApi';
 import { getEachColomn } from './utils';
 
@@ -38,6 +39,10 @@ export const getRerender = (status) => ({
   type: 'GET_RERENDER',
   payload: status,
 });
+export const changeTasksPosition = (colomnId, tasksList, reduxTasksList) => ({
+  type: 'CHANGE_TASKS_POSITION',
+  payload: { colomnId, tasksList, reduxTasksList },
+});
 
 export const getBoard = (id) => async (dispatch) => {
   dispatch(setLoading());
@@ -56,4 +61,9 @@ export const changeColomns =
   (firstColomn, secondColomn, fPos, sPos, boardId) => async (dispatch) => {
     firebase.changeColomns(firstColomn, secondColomn, fPos, sPos, boardId);
     dispatch(changeColomnsPosition(+firstColomn, +secondColomn, +fPos, +sPos));
+  };
+export const changeTasks =
+  (boardId, colomnId, tasksList, reduxTasksList) => async (dispatch) => {
+    firebase.changeTaksInColomn(boardId, tasksList);
+    dispatch(changeTasksPosition(colomnId, tasksList, reduxTasksList));
   };

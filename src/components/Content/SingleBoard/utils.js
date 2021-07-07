@@ -20,7 +20,6 @@ export const getTasksAndSort = (columnId, columnTasks, tasksList, page) => {
         },
       },
     };
-    console.log(page.columns[columnId]);
   });
   return tasks;
 };

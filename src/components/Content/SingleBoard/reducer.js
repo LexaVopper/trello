@@ -2,7 +2,7 @@ const initialState = {
   page: { task: {} },
   columns: {},
   columnOrder: {},
-  id: null,
+  id: '',
   error: false,
   isLoading: false,
   rerender: false,
@@ -11,7 +11,6 @@ const initialState = {
 const getBoard = (state = initialState, action) => {
   switch (action.type) {
     case 'GET_BOARD':
-      console.log(action.payload.colomnTasks);
       return {
         ...state,
         id: action.payload.id,
@@ -73,6 +72,27 @@ const getBoard = (state = initialState, action) => {
           [action.payload.secondColomn]: {
             ...state.columnOrder[action.payload.secondColomn],
             position: action.payload.sPos,
+          },
+        },
+      };
+    case 'CHANGE_TASKS_POSITION':
+      return {
+        ...state,
+        page: {
+          ...state.page,
+          columns: {
+            ...state.page.columns,
+            [action.payload.colomnId]: {
+              ...state.page.columns[action.payload.colomnId],
+              tasksId: {
+                ...state.page.columns.tasksId,
+                ...action.payload.tasksList,
+              },
+            },
+          },
+          task: {
+            ...state.page.task,
+            ...action.payload.reduxTasksList,
           },
         },
       };

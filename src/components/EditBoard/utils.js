@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import * as _ from 'lodash';
 /* eslint-disable no-extend-native */
 
@@ -18,4 +19,20 @@ export const getTasksAndSort = (column, listTasks) => {
   }
 
   return tasks;
+};
+export const createNewListOfTasks = (listOfColomnTasks, listTasks) => {
+  const newTasksList = {};
+  const reduxTasksList = {};
+  listOfColomnTasks.forEach((oneTask, index) => {
+    newTasksList[oneTask.id] = {
+      id: oneTask.id,
+      position: index,
+    };
+    reduxTasksList[oneTask.id] = {
+      ...listTasks[oneTask.id],
+      position: index,
+    };
+  });
+
+  return { newTasksList, reduxTasksList };
 };

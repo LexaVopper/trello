@@ -8,9 +8,10 @@ import { CreateColumn } from './CreateColumn/CreateColomn';
 import {
   clearBoardColumns,
   changeColomns,
+  changeTasks,
 } from '../Content/SingleBoard/action';
 
-import { sortByAcs, getTasksAndSort } from './utils';
+import { sortByAcs, getTasksAndSort, createNewListOfTasks } from './utils';
 
 export const EditBody = React.memo(() => {
   const { id } = useParams();
@@ -19,7 +20,7 @@ export const EditBody = React.memo(() => {
   const col = useSelector((state) => state.getBoard?.columns);
   const listOfCols = useSelector((state) => state.getBoard?.columnOrder);
   const listTasks = useSelector((state) => state.getBoard?.page?.task);
-
+  const simpleTasks = useSelector((state) => state.getBoard?.page?.columns);
   const sortedListOfCols = sortByAcs(listOfCols);
 
   const [cardList, setState] = useState({
@@ -62,40 +63,38 @@ export const EditBody = React.memo(() => {
     }
     if (type === 'column') {
       const newColumnOrder = Array.from(sortedListOfCols);
-      const positionF = sortedListOfCols[source.index].position;
-      const positionS = sortedListOfCols[destination.index].position;
+      const positionF = source.index;
+      const positionS = destination.index;
       const secondEllementId = sortedListOfCols[destination.index].id;
 
       newColumnOrder.splice(source.index, 1);
       newColumnOrder.splice(destination.index, 0, listOfCols[draggableId]);
-      console.log(listOfCols, draggableId);
       dispatch(
         changeColomns(secondEllementId, draggableId, positionF, positionS, id)
       );
     }
 
-    const start = col[source.droppableId];
-    const finish = col[destination.droppableId];
+    const start = simpleTasks[source.droppableId];
+    const finish = simpleTasks[destination.droppableId];
 
-    // // In one list
-    // if (start === finish) {
-    //   const newTaskIds = Array.from(start.tasksId);
-    //   console.log(start, newTaskIds);
-    //   newTaskIds.splice(source.index, 1);
-    //   newTaskIds.splice(destination.index, 0, draggableId);
-    //   const newColumn = {
-    //     ...start,
-    //     taskIds: newTaskIds,
-    //   };
-    //   const newState = {
-    //     ...cardList,
-    //     columns: {
-    //       ...cardList.columns,
-    //       [newColumn.id]: newColumn,
-    //     },
-    //   };
-    //   setState(newState);
-    // }
+    // In one list
+    if (start === finish && start) {
+      const newTaskIds = Array.from(sortByAcs(start.tasksId));
+      const colomnId = source.droppableId;
+      newTaskIds.splice(source.index, 1);
+      newTaskIds.splice(
+        destination.index,
+        0,
+        simpleTasks[source.droppableId].tasksId[draggableId]
+      );
+
+      const { newTasksList, reduxTasksList } = createNewListOfTasks(
+        newTaskIds,
+        listTasks
+      );
+
+      dispatch(changeTasks(id, colomnId, newTasksList, reduxTasksList));
+    }
     // const startTaskIds = Array.from(start.taskIds);
     // startTaskIds.splice(source.index, 1);
     // const newStart = {
@@ -142,7 +141,6 @@ export const EditBody = React.memo(() => {
               {sortedListOfCols.map((columnId, index) => {
                 const column = col[columnId.id];
                 const tasks = getTasksAndSort(column, listTasks);
-
                 return (
                   column && (
                     <Card
