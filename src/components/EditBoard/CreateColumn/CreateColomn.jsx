@@ -15,10 +15,13 @@ export const CreateColumn = () => {
   const firebase = React.useContext(FirebaseContext);
   const { register, handleSubmit } = useForm();
   const { id } = useParams();
-  const columns = useSelector((state) => state.getBoard?.columns);
+  const columns = useSelector((state) => state.getBoard?.page?.columns);
   const rerender = useSelector((state) => state.getBoard?.rerender);
+  let colomnPosition = 0;
+  if (columns) {
+    colomnPosition = Object.keys(columns).length;
+  }
 
-  const colomnPosition = Object.keys(columns)?.length;
   const [active, setActive] = useState(false);
 
   const onSubmit = (data) => {

@@ -2,13 +2,12 @@
 import firebase from '../../FirebaseApi/fireApi';
 import { getEachColomn } from './utils';
 
-export const getBoardInfo = (page, id, columnOrder, colomnTasks) => ({
+export const getBoardInfo = (page, id, columnOrder) => ({
   type: 'GET_BOARD',
   payload: {
     page,
     id,
     columnOrder,
-    colomnTasks,
   },
 });
 
@@ -18,10 +17,7 @@ export const setError = () => ({
 export const setLoading = () => ({
   type: 'SET_LOADING',
 });
-export const getBoardColumns = (columns, columnOrders) => ({
-  type: 'GET_BOARD_COLUMNS',
-  payload: { columns, columnOrders },
-});
+
 export const clearBoardColumns = () => ({
   type: 'CLEAR_BOARD_COLUMNS',
 });
@@ -38,14 +34,25 @@ export const changeTasksPosition = (colomnId, tasksList, reduxTasksList) => ({
   payload: { colomnId, tasksList, reduxTasksList },
 });
 
+export const changeTasksPositionBetweenCol = (
+  fColumnId,
+  sColumnId,
+  fromColumn,
+  toColumn,
+  allTasksList
+) => ({
+  type: 'CHANGE_TASKS_POSITION_BETWEEN',
+  payload: { fColumnId, sColumnId, fromColumn, toColumn, allTasksList },
+});
+
 export const getBoard = (id) => async (dispatch) => {
   dispatch(setLoading());
   const data = await firebase.db.ref(`db/boards/${id}/`).once('value');
 
   if (data.val()) {
-    const { columnOrder, colomnTasks } = getEachColomn(data.val());
+    const { columnOrder } = getEachColomn(data.val());
 
-    dispatch(getBoardInfo(data.val(), id, columnOrder, colomnTasks));
+    dispatch(getBoardInfo(data.val(), id, columnOrder));
   } else {
     dispatch(setError());
   }
@@ -58,6 +65,21 @@ export const changeColomns = (boardId, newColumnsList) => async (dispatch) => {
 
 export const changeTasks =
   (boardId, colomnId, tasksList, reduxTasksList) => async (dispatch) => {
-    firebase.changeTaksInColomn(boardId, tasksList);
+    firebase.changeTaksInBoard(boardId, tasksList);
     dispatch(changeTasksPosition(colomnId, tasksList, reduxTasksList));
+  };
+
+export const changeTasksBetweenColumns =
+  (boardId, fColumnId, sColumnId, fromColumn, toColumn, allTasksList) =>
+  async (dispatch) => {
+    firebase.changeTaksInBoard(boardId, allTasksList);
+    dispatch(
+      changeTasksPositionBetweenCol(
+        fColumnId,
+        sColumnId,
+        fromColumn,
+        toColumn,
+        allTasksList
+      )
+    );
   };

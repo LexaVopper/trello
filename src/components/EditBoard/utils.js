@@ -6,19 +6,19 @@ export const sortByAcs = (list) => {
   return _.orderBy(list, ['position'], ['asc']);
 };
 
-export const getTasksAndSort = (column, listTasks) => {
-  let tasks = [];
+export const getTasksAndCut = (column, listTasks) => {
+  let taskslist = [];
 
   if (column.tasksId && listTasks.length !== 0) {
-    tasks = column.tasksId;
+    taskslist = column.tasksId;
 
-    Object.keys(tasks).forEach((taskId) => {
-      tasks[taskId] = listTasks[taskId];
+    Object.keys(taskslist).forEach((taskId) => {
+      taskslist[taskId] = listTasks[taskId];
     });
-    tasks = sortByAcs(tasks);
+    taskslist = sortByAcs(taskslist);
   }
 
-  return tasks;
+  return taskslist;
 };
 
 export const createNewListOfTasks = (listOfColumnTasks, listTasks) => {
@@ -36,6 +36,53 @@ export const createNewListOfTasks = (listOfColumnTasks, listTasks) => {
   });
 
   return { newTasksList, reduxTasksList };
+};
+
+export const tasksBetweenColomns = (
+  fColumnId,
+  sColumnId,
+  InColumn,
+  outColumn,
+  listTasks
+) => {
+  const firstColumn = {};
+  const secondColumn = {};
+  const newTasksList = {};
+  // first column
+  InColumn.forEach((oneTask, index) => {
+    firstColumn[fColumnId] = {
+      ...firstColumn[fColumnId],
+      tasksId: {
+        ...firstColumn[fColumnId]?.tasksId,
+        [oneTask.id]: {
+          id: oneTask.id,
+          position: index,
+        },
+      },
+    };
+    newTasksList[oneTask.id] = {
+      ...listTasks[oneTask.id],
+      position: index,
+    };
+  });
+  // second column
+  outColumn.forEach((oneTask, index) => {
+    secondColumn[sColumnId] = {
+      ...secondColumn[sColumnId],
+      tasksId: {
+        ...secondColumn[sColumnId]?.tasksId,
+        [oneTask.id]: {
+          id: oneTask.id,
+          position: index,
+        },
+      },
+    };
+    newTasksList[oneTask.id] = {
+      ...listTasks[oneTask.id],
+      position: index,
+    };
+  });
+  return { firstColumn, secondColumn, newTasksList };
 };
 
 export const createNewListOfColumns = (listOfColumns) => {

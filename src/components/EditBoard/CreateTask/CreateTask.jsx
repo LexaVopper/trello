@@ -16,14 +16,12 @@ export default function CreateTask({ colomnId }) {
   const { register, handleSubmit } = useForm();
   const boardId = useSelector((state) => state.getBoard?.id);
   const rerender = useSelector((state) => state.getBoard?.rerender);
-
   const taskIds = useSelector(
-    (state) => state.getBoard?.columns[colomnId]?.tasksId
+    (state) => state.getBoard?.page?.columns[colomnId]?.tasksId
   );
-  let taskPosition;
-  if (!taskIds) {
-    taskPosition = 0;
-  } else {
+
+  let taskPosition = 0;
+  if (taskIds) {
     taskPosition = Object.keys(taskIds).length;
   }
 

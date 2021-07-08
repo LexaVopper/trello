@@ -1,6 +1,6 @@
 const initialState = {
-  page: { task: {} },
-  columns: {},
+  page: { task: {}, columns: {} },
+
   columnOrder: {},
   id: '',
   error: false,
@@ -14,14 +14,8 @@ const getBoard = (state = initialState, action) => {
       return {
         ...state,
         id: action.payload.id,
-        page: {
-          ...action.payload.page,
-          columns: {
-            ...action.payload.page.columns,
-            ...action.payload.colomnTasks,
-          },
-        },
-        columns: { ...action.payload.page.columns },
+        page: { ...action.payload.page },
+
         columnOrder: action.payload.columnOrder,
         error: false,
         isLoading: false,
@@ -37,13 +31,7 @@ const getBoard = (state = initialState, action) => {
         ...state,
         isLoading: true,
       };
-    case 'GET_BOARD_COLUMNS':
-      return {
-        ...state,
-        columns: action.payload.columns,
-        columnOrder: action.payload.columnOrders,
-        isLoading: false,
-      };
+
     case 'GET_RERENDER':
       return {
         ...state,
@@ -77,11 +65,34 @@ const getBoard = (state = initialState, action) => {
           },
         },
       };
+    case 'CHANGE_TASKS_POSITION_BETWEEN':
+      return {
+        ...state,
+        page: {
+          ...state.page,
+          columns: {
+            ...state.page.columns,
+            [action.payload.fColumnId]: {
+              ...state.page.columns[action.payload.fColumnId],
+
+              ...action.payload.toColumn[action.payload.fColumnId],
+            },
+            [action.payload.sColumnId]: {
+              ...state.page.columns[action.payload.sColumnId],
+
+              ...action.payload.toColumn[action.payload.sColumnId],
+            },
+          },
+          task: {
+            ...state.page.task,
+            ...action.payload.allTasksList,
+          },
+        },
+      };
     case 'CLEAR_BOARD_COLUMNS':
       return {
         ...state,
-        page: { task: {} },
-        columns: {},
+        page: { task: {}, columns: {} },
         columnOrder: {},
         id: '',
         error: false,

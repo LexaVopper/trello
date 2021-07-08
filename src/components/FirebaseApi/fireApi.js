@@ -68,7 +68,7 @@ class Firebase {
     this.db
       .ref()
       .child(`db/boards/${boardId}/columns/${columnId}/tasksId/${id}`)
-      .set({ id });
+      .set({ id, position: columnPosition });
   }
 
   changeColomns(boardId, newColumnsList) {
@@ -79,7 +79,7 @@ class Firebase {
     });
   }
 
-  changeTaksInColomn(boardId, tasksList) {
+  changeTaksInBoard(boardId, tasksList) {
     Object.values(tasksList).forEach((task) => {
       this.db.ref().child(`db/boards/${boardId}/task/${task.id}`).update({
         position: task.position,

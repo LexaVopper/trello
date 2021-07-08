@@ -17,7 +17,7 @@ export const Card = ({ column, tasks, id, index }) => {
             {...provided.draggableProps}
           >
             <h1 className='card__title' {...provided.dragHandleProps}>
-              {column.title}
+              {column.title} {column.id}
               <button className='button'>
                 <FontAwesomeIcon icon={faHome} className='menu-icon' />
               </button>
