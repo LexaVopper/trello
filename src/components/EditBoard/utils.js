@@ -20,10 +20,11 @@ export const getTasksAndSort = (column, listTasks) => {
 
   return tasks;
 };
-export const createNewListOfTasks = (listOfColomnTasks, listTasks) => {
+
+export const createNewListOfTasks = (listOfColumnTasks, listTasks) => {
   const newTasksList = {};
   const reduxTasksList = {};
-  listOfColomnTasks.forEach((oneTask, index) => {
+  listOfColumnTasks.forEach((oneTask, index) => {
     newTasksList[oneTask.id] = {
       id: oneTask.id,
       position: index,
@@ -35,4 +36,17 @@ export const createNewListOfTasks = (listOfColomnTasks, listTasks) => {
   });
 
   return { newTasksList, reduxTasksList };
+};
+
+export const createNewListOfColumns = (listOfColumns) => {
+  const newColumnsList = {};
+
+  listOfColumns.forEach((oneTask, index) => {
+    newColumnsList[oneTask.id] = {
+      id: oneTask.id,
+      position: index,
+    };
+  });
+
+  return { newColumnsList };
 };

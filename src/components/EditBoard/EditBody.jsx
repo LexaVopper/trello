@@ -11,7 +11,12 @@ import {
   changeTasks,
 } from '../Content/SingleBoard/action';
 
-import { sortByAcs, getTasksAndSort, createNewListOfTasks } from './utils';
+import {
+  sortByAcs,
+  getTasksAndSort,
+  createNewListOfTasks,
+  createNewListOfColumns,
+} from './utils';
 
 export const EditBody = React.memo(() => {
   const { id } = useParams();
@@ -63,15 +68,12 @@ export const EditBody = React.memo(() => {
     }
     if (type === 'column') {
       const newColumnOrder = Array.from(sortedListOfCols);
-      const positionF = source.index;
-      const positionS = destination.index;
-      const secondEllementId = sortedListOfCols[destination.index].id;
 
       newColumnOrder.splice(source.index, 1);
       newColumnOrder.splice(destination.index, 0, listOfCols[draggableId]);
-      dispatch(
-        changeColomns(secondEllementId, draggableId, positionF, positionS, id)
-      );
+
+      const { newColumnsList } = createNewListOfColumns(newColumnOrder);
+      dispatch(changeColomns(id, newColumnsList));
     }
 
     const start = simpleTasks[source.droppableId];
@@ -120,7 +122,7 @@ export const EditBody = React.memo(() => {
 
   React.useEffect(() => {
     return () => {
-      // dispatch(clearBoardColumns());
+      dispatch(clearBoardColumns());
     };
   }, []);
 

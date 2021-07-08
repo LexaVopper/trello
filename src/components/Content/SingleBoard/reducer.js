@@ -52,27 +52,8 @@ const getBoard = (state = initialState, action) => {
     case 'CHANGE_COLOMNS_POSITION':
       return {
         ...state,
-        columns: {
-          ...state.columns,
-          [action.payload.firstColomn]: {
-            ...state.columns[action.payload.firstColomn],
-            position: action.payload.fPos,
-          },
-          [action.payload.secondColomn]: {
-            ...state.columns[action.payload.secondColomn],
-            position: action.payload.sPos,
-          },
-        },
         columnOrder: {
-          ...state.columnOrder,
-          [action.payload.firstColomn]: {
-            ...state.columnOrder[action.payload.firstColomn],
-            position: action.payload.fPos,
-          },
-          [action.payload.secondColomn]: {
-            ...state.columnOrder[action.payload.secondColomn],
-            position: action.payload.sPos,
-          },
+          ...action.payload,
         },
       };
     case 'CHANGE_TASKS_POSITION':
@@ -99,10 +80,13 @@ const getBoard = (state = initialState, action) => {
     case 'CLEAR_BOARD_COLUMNS':
       return {
         ...state,
-        columns: {
-          taskIds: {},
-        },
+        page: { task: {} },
+        columns: {},
         columnOrder: {},
+        id: '',
+        error: false,
+        isLoading: false,
+        rerender: false,
       };
     default:
       return state;

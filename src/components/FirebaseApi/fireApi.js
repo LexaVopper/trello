@@ -71,15 +71,12 @@ class Firebase {
       .set({ id });
   }
 
-  changeColomns(firstColomn, secondColomn, f_Position, s_Position, boardId) {
-    this.db
-      .ref()
-      .child(`db/boards/${boardId}/columns/${secondColomn}`)
-      .update({ position: +s_Position });
-    this.db
-      .ref()
-      .child(`db/boards/${boardId}/columns/${firstColomn}`)
-      .update({ position: +f_Position });
+  changeColomns(boardId, newColumnsList) {
+    Object.values(newColumnsList).forEach((column) => {
+      this.db.ref().child(`db/boards/${boardId}/columns/${column.id}`).update({
+        position: column.position,
+      });
+    });
   }
 
   changeTaksInColomn(boardId, tasksList) {

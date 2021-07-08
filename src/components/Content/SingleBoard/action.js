@@ -18,7 +18,6 @@ export const setError = () => ({
 export const setLoading = () => ({
   type: 'SET_LOADING',
 });
-///
 export const getBoardColumns = (columns, columnOrders) => ({
   type: 'GET_BOARD_COLUMNS',
   payload: { columns, columnOrders },
@@ -26,14 +25,9 @@ export const getBoardColumns = (columns, columnOrders) => ({
 export const clearBoardColumns = () => ({
   type: 'CLEAR_BOARD_COLUMNS',
 });
-export const changeColomnsPosition = (
-  firstColomn,
-  secondColomn,
-  fPos,
-  sPos
-) => ({
+export const changeColomnsPosition = (newColumnsList) => ({
   type: 'CHANGE_COLOMNS_POSITION',
-  payload: { firstColomn, secondColomn, fPos, sPos },
+  payload: newColumnsList,
 });
 export const getRerender = (status) => ({
   type: 'GET_RERENDER',
@@ -57,11 +51,11 @@ export const getBoard = (id) => async (dispatch) => {
   }
 };
 
-export const changeColomns =
-  (firstColomn, secondColomn, fPos, sPos, boardId) => async (dispatch) => {
-    firebase.changeColomns(firstColomn, secondColomn, fPos, sPos, boardId);
-    dispatch(changeColomnsPosition(+firstColomn, +secondColomn, +fPos, +sPos));
-  };
+export const changeColomns = (boardId, newColumnsList) => async (dispatch) => {
+  firebase.changeColomns(boardId, newColumnsList);
+  dispatch(changeColomnsPosition(newColumnsList));
+};
+
 export const changeTasks =
   (boardId, colomnId, tasksList, reduxTasksList) => async (dispatch) => {
     firebase.changeTaksInColomn(boardId, tasksList);
