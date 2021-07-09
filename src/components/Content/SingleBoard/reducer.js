@@ -1,6 +1,5 @@
 const initialState = {
   page: { task: {}, columns: {} },
-
   columnOrder: {},
   id: '',
   error: false,
@@ -15,7 +14,6 @@ const getBoard = (state = initialState, action) => {
         ...state,
         id: action.payload.id,
         page: { ...action.payload.page },
-
         columnOrder: action.payload.columnOrder,
         error: false,
         isLoading: false,
@@ -72,14 +70,14 @@ const getBoard = (state = initialState, action) => {
           ...state.page,
           columns: {
             ...state.page.columns,
+
             [action.payload.fColumnId]: {
               ...state.page.columns[action.payload.fColumnId],
-
-              ...action.payload.toColumn[action.payload.fColumnId],
+              tasksId:
+                action.payload.fromColumn[action.payload.fColumnId]?.tasksId,
             },
             [action.payload.sColumnId]: {
               ...state.page.columns[action.payload.sColumnId],
-
               ...action.payload.toColumn[action.payload.sColumnId],
             },
           },

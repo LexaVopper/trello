@@ -82,22 +82,21 @@ export const EditBody = React.memo(() => {
       finishTaskIds,
       listTasks
     );
-    console.log(firstColumn, secondColumn, newTasksList);
-    // dispatch(
-    //   changeTasksBetweenColumns(
-    //     id,
-    //     source.droppableId,
-    //     destination.droppableId,
-    //     firstColumn,
-    //     secondColumn,
-    //     newTasksList
-    //   )
-    // );
+    dispatch(
+      changeTasksBetweenColumns(
+        id,
+        source.droppableId,
+        destination.droppableId,
+        firstColumn,
+        secondColumn,
+        newTasksList
+      )
+    );
   };
 
   React.useEffect(() => {
     return () => {
-      // dispatch(clearBoardColumns());
+      dispatch(clearBoardColumns());
     };
   }, []);
 

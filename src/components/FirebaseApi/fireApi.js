@@ -79,11 +79,34 @@ class Firebase {
     });
   }
 
-  changeTaksInBoard(boardId, tasksList) {
+  changeTaksInBoard(
+    boardId,
+    tasksList,
+    fColumnId,
+    sColumnId,
+    fromColumn,
+    toColumn
+  ) {
     Object.values(tasksList).forEach((task) => {
       this.db.ref().child(`db/boards/${boardId}/task/${task.id}`).update({
         position: task.position,
       });
+    });
+    if (fromColumn?.tasksId) {
+      this.db.ref().child(`db/boards/${boardId}/columns/${fColumnId}`).update({
+        tasksId: fromColumn?.tasksId,
+      });
+    } else {
+      this.db
+        .ref()
+        .child(`db/boards/${boardId}/columns/${fColumnId}/tasksId`)
+        .set({
+          tasksId: {},
+        });
+    }
+
+    this.db.ref().child(`db/boards/${boardId}/columns/${sColumnId}`).update({
+      tasksId: toColumn?.tasksId,
     });
   }
 
