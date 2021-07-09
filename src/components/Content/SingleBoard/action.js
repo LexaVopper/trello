@@ -72,7 +72,7 @@ export const changeTasks =
 export const changeTasksBetweenColumns =
   (boardId, fColumnId, sColumnId, fromColumn, toColumn, allTasksList) =>
   async (dispatch) => {
-    firebase.changeTaksInBoard(
+    firebase.changeTaksBetweenBoards(
       boardId,
       allTasksList,
       fColumnId,

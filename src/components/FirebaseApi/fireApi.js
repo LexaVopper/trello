@@ -79,7 +79,15 @@ class Firebase {
     });
   }
 
-  changeTaksInBoard(
+  changeTaksInBoard(boardId, tasksList) {
+    Object.values(tasksList).forEach((task) => {
+      this.db.ref().child(`db/boards/${boardId}/task/${task.id}`).update({
+        position: task.position,
+      });
+    });
+  }
+
+  changeTaksBetweenBoards(
     boardId,
     tasksList,
     fColumnId,
