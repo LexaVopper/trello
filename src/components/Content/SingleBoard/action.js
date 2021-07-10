@@ -90,3 +90,13 @@ export const changeTasksBetweenColumns =
       )
     );
   };
+
+export const addColumn = (newColumn, newColumnOrder) => ({
+  type: 'ADD_NEW_COLUMN',
+  payload: { newColumn, newColumnOrder },
+});
+
+export const addTask = (newTask, newColumnTask, colomnId) => ({
+  type: 'ADD_NEW_Task',
+  payload: { newTask, newColumnTask, colomnId },
+});

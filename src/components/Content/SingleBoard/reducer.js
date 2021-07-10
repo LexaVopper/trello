@@ -87,6 +87,42 @@ const getBoard = (state = initialState, action) => {
           },
         },
       };
+    case 'ADD_NEW_COLUMN':
+      return {
+        ...state,
+        page: {
+          ...state.page,
+          columns: {
+            ...state.page.columns,
+            ...action.payload.newColumn,
+          },
+        },
+        columnOrder: {
+          ...state.columnOrder,
+          ...action.payload.newColumnOrder,
+        },
+      };
+    case 'ADD_NEW_Task':
+      return {
+        ...state,
+        page: {
+          ...state.page,
+          columns: {
+            ...state.page.columns,
+            [action.payload.colomnId]: {
+              ...state.page.columns[action.payload.colomnId],
+              tasksId: {
+                ...state.page.columns[action.payload.colomnId].tasksId,
+                ...action.payload.newColumnTask,
+              },
+            },
+          },
+          task: {
+            ...state.page.task,
+            ...action.payload.newTask,
+          },
+        },
+      };
     case 'CLEAR_BOARD_COLUMNS':
       return {
         ...state,

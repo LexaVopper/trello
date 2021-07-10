@@ -7,8 +7,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import cn from 'classnames';
 import { useForm } from 'react-hook-form';
-import { getRerender } from '../../Content/SingleBoard/action';
+import { addColumn } from '../../Content/SingleBoard/action';
 import { FirebaseContext } from '../../FirebaseApi';
+import { createColumn } from './utils';
 
 export const CreateColumn = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,6 @@ export const CreateColumn = () => {
   const { register, handleSubmit } = useForm();
   const { id } = useParams();
   const columns = useSelector((state) => state.getBoard?.page?.columns);
-  const rerender = useSelector((state) => state.getBoard?.rerender);
   let colomnPosition = 0;
   if (columns) {
     colomnPosition = Object.keys(columns).length;
@@ -25,12 +25,15 @@ export const CreateColumn = () => {
   const [active, setActive] = useState(false);
 
   const onSubmit = (data) => {
-    firebase.addColumn(data.colomnTitle, id, colomnPosition);
-    if (rerender) {
-      dispatch(getRerender(false));
-    } else {
-      dispatch(getRerender(true));
-    }
+    const columnId = Math.round(Math.random() * 100000);
+    const { newColumn, newColumnOrder } = createColumn(
+      id,
+      columnId,
+      data.colomnTitle,
+      colomnPosition
+    );
+    dispatch(addColumn(newColumn, newColumnOrder));
+    firebase.addColumn(data.colomnTitle, id, colomnPosition, columnId);
   };
 
   return (

@@ -5,17 +5,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import cn from 'classnames';
+import { useParams } from 'react-router';
 import { useForm } from 'react-hook-form';
+import { createNewTask } from './utils';
 
 import { FirebaseContext } from '../../FirebaseApi';
-import { getRerender } from '../../Content/SingleBoard/action';
+import { addTask } from '../../Content/SingleBoard/action';
 
 export default function CreateTask({ colomnId }) {
   const dispatch = useDispatch();
   const firebase = React.useContext(FirebaseContext);
   const { register, handleSubmit } = useForm();
-  const boardId = useSelector((state) => state.getBoard?.id);
-  const rerender = useSelector((state) => state.getBoard?.rerender);
+  const { id } = useParams();
+
   const taskIds = useSelector(
     (state) => state.getBoard?.page?.columns[colomnId]?.tasksId
   );
@@ -28,12 +30,16 @@ export default function CreateTask({ colomnId }) {
   const [active, setActive] = useState(false);
 
   const onSubmit = (data) => {
-    firebase.addTask(data.taskTitle, colomnId, boardId, taskPosition);
-    if (rerender) {
-      dispatch(getRerender(false));
-    } else {
-      dispatch(getRerender(true));
-    }
+    const taskId = Math.round(Math.random() * 100000);
+
+    const { newTask, newColumnTask } = createNewTask(
+      taskId,
+      data.taskTitle,
+      taskPosition
+    );
+    dispatch(addTask(newTask, newColumnTask, colomnId));
+    firebase.addTask(data.taskTitle, colomnId, id, taskPosition, taskId);
+
     setActive(false);
   };
 

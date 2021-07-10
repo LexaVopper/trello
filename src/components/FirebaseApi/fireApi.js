@@ -48,8 +48,7 @@ class Firebase {
       .set({ id, name });
   }
 
-  addColumn(title, boardId, columnPosition) {
-    const id = Math.round(Math.random() * 100000);
+  addColumn(title, boardId, columnPosition, id) {
     this.db
       .ref()
       .child(`db/boards/${boardId}`)
@@ -57,9 +56,7 @@ class Firebase {
       .set({ id, title, board: boardId, position: columnPosition });
   }
 
-  addTask(title, columnId, boardId, columnPosition) {
-    const id = Math.round(Math.random() * 100000);
-
+  addTask(title, columnId, boardId, columnPosition, id) {
     this.db
       .ref()
       .child(`db/boards/${boardId}/task/${id}`)
