@@ -1,24 +1,24 @@
-/* eslint-disable no-unused-vars */
 import * as _ from 'lodash';
-/* eslint-disable no-extend-native */
 
 export const sortByAcs = (list) => {
   return _.orderBy(list, ['position'], ['asc']);
 };
 
 export const getTasksAndCut = (column, listTasks) => {
-  let taskslist = [];
-
   if (column.tasksId && listTasks.length !== 0) {
-    taskslist = column.tasksId;
-
-    Object.keys(taskslist).forEach((taskId) => {
-      taskslist[taskId] = listTasks[taskId];
+    let newT = {};
+    Object.keys(column.tasksId).forEach((taskId) => {
+      newT = {
+        ...newT,
+        [taskId]: {
+          ...listTasks[taskId],
+        },
+      };
     });
-    taskslist = sortByAcs(taskslist);
+    return sortByAcs(newT);
   }
 
-  return taskslist;
+  return [];
 };
 
 export const createNewListOfTasks = (listOfColumnTasks, listTasks) => {

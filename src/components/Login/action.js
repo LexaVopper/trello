@@ -10,7 +10,3 @@ export const getUser = (id) => (dispatch) => {
     dispatch(getUserInfo(data.val()));
   });
 };
-
-// const startLoading = () => ({
-//   type: 'SET_LOADING',
-// });

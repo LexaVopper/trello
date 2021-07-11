@@ -1,5 +1,3 @@
-/* eslint-disable prefer-const */
-/* eslint-disable no-unused-vars */
 import * as _ from 'lodash';
 
 export const sortByAcs = (list) => {
@@ -20,6 +18,5 @@ export const getEachColomn = (page) => {
       columnOrder[a.id] = pos;
     });
   }
-
   return { columnOrder };
 };
