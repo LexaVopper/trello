@@ -32,6 +32,7 @@
   &__boards {
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
     flex-direction: row;
@@ -42,6 +43,7 @@
   border-radius: 3px;
   display: flex;
   height: 80px;
+  min-width: 150px;
   position: relative;
   flex-direction: column;
   justify-content: space-between;

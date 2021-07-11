@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import { Task } from './Task';
 import CreateTask from './CreateTask/CreateTask';
 
@@ -17,9 +17,9 @@ export const Card = ({ column, tasks, id, index }) => {
             {...provided.draggableProps}
           >
             <h1 className='card__title' {...provided.dragHandleProps}>
-              {column.title} {column.id}
+              {column.title}
               <button className='button'>
-                <FontAwesomeIcon icon={faHome} className='menu-icon' />
+                <FontAwesomeIcon icon={faEllipsisH} className='menu-icon' />
               </button>
             </h1>
             <Droppable droppableId={id} type='task'>

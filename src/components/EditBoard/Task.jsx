@@ -11,7 +11,9 @@ export const Task = ({ task, index }) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          {task.title}
+          <div className='task-details '>
+            <span className='task-details__title'>{task.title}</span>
+          </div>
           {task.content}
         </div>
       )}
