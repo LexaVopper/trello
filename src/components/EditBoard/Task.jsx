@@ -1,22 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
+import Portal from '../Modal/Portal';
+import { TaskInfo } from './TaskInfo/TaskInfo';
 
-export const Task = ({ task, index }) => {
+export const Task = ({ task, index, column }) => {
+  const [toggleModalWindow, openModal] = useState(false);
+
+  const openCloseTask = () =>
+    toggleModalWindow ? openModal(false) : openModal(true);
+
   return (
-    <Draggable draggableId={String(task.id)} index={index}>
-      {(provided) => (
-        <div
-          className='task'
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-        >
-          <div className='task-details '>
-            <span className='task-details__title'>{task.title}</span>
+    <>
+      <Draggable draggableId={String(task.id)} index={index}>
+        {(provided) => (
+          <div
+            className='task'
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            onClick={() => openCloseTask()}
+          >
+            <div className='task-details '>
+              <span className='task-details__title'>{task.title}</span>
+            </div>
+            {task.content}
           </div>
-          {task.content}
-        </div>
-      )}
-    </Draggable>
+        )}
+      </Draggable>
+      <Portal classModal={toggleModalWindow}>
+        <TaskInfo task={task} column={column} />
+      </Portal>
+    </>
   );
 };

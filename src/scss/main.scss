@@ -3,6 +3,7 @@ $buttonColor: #4e97c2;
 $buttonHoverColor: #3588b9;
 $mainhover: rgba(9, 30, 66, 0.08);
 $boardColor: rgb(176, 70, 50);
+$iconTaskInfo: #42526e;
 
 body {
   position: relative;
@@ -51,3 +52,4 @@ body {
 @import '../components/EditBoard/Edit.scss';
 @import '../components/EditBoard/CreateColumn/CreateColumn.scss';
 @import '../components/EditBoard/CreateTask/CreateTask.scss';
+@import '../components/EditBoard/TaskInfo/TaskInfo.scss';

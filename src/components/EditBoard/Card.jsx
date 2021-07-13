@@ -31,7 +31,12 @@ export const Card = ({ column, tasks, id, index }) => {
                 >
                   {tasks &&
                     tasks.map((task, taskIndex) => (
-                      <Task key={task.id} task={task} index={taskIndex} />
+                      <Task
+                        key={task.id}
+                        task={task}
+                        index={taskIndex}
+                        column={column}
+                      />
                     ))}
 
                   {provider.placeholder}
