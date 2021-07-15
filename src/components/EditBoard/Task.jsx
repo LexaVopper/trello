@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import React, { useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import Portal from '../Modal/Portal';
@@ -6,8 +7,9 @@ import { TaskInfo } from './TaskInfo/TaskInfo';
 export const Task = ({ task, index, column }) => {
   const [toggleModalWindow, openModal] = useState(false);
 
-  const openCloseTask = () =>
+  const openCloseTask = () => {
     toggleModalWindow ? openModal(false) : openModal(true);
+  };
 
   return (
     <>
@@ -18,7 +20,7 @@ export const Task = ({ task, index, column }) => {
             ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
-            onClick={() => openCloseTask()}
+            onClick={(e) => openCloseTask(e)}
           >
             <div className='task-details '>
               <span className='task-details__title'>{task.title}</span>
@@ -27,9 +29,11 @@ export const Task = ({ task, index, column }) => {
           </div>
         )}
       </Draggable>
-      <Portal classModal={toggleModalWindow}>
-        <TaskInfo task={task} column={column} />
-      </Portal>
+      {toggleModalWindow && (
+        <Portal classModal={toggleModalWindow}>
+          <TaskInfo task={task} column={column} />
+        </Portal>
+      )}
     </>
   );
 };

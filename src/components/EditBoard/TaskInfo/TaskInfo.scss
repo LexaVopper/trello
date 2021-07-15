@@ -76,3 +76,77 @@
     overflow: hidden;
   }
 }
+
+.main-info-destination {
+  padding: 8px 0 0 8px;
+  margin: 0 0 4px 40px;
+  min-height: 32px;
+  position: relative;
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+
+  &__title {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+  }
+
+  &__text {
+    margin-top: 10px;
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    textarea {
+      background-color: rgba(9, 30, 66, 0.04);
+      box-shadow: none;
+      border: none;
+      border-radius: 3px;
+      display: block;
+      min-height: 40px;
+      padding: 8px 12px;
+      text-decoration: none;
+      resize: none;
+      outline: none;
+    }
+    input[type='submit'] {
+      background-color: #0079bf;
+      box-shadow: none;
+      border: none;
+      color: #fff;
+
+      width: 120px;
+    }
+    &.focus {
+      textarea {
+        min-height: 108px;
+        background-color: #fff;
+        box-shadow: 0 0 0 2px #0079bf;
+      }
+      .main-info-destination__buttons {
+        visibility: visible;
+      }
+    }
+  }
+  &__buttons {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    visibility: hidden;
+  }
+  &__delete {
+    font-size: 23px;
+    transform: rotate(45deg);
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  &__icon {
+    position: absolute;
+    left: -28px;
+    top: 4px;
+    font-size: 23px;
+    color: $iconTaskInfo;
+  }
+}
