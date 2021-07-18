@@ -1,14 +1,20 @@
 /* eslint-disable no-unused-vars */
 import React, { useCallback, useEffect, useState } from 'react';
-import cn from 'classnames';
-import { useForm } from 'react-hook-form';
-
+import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faColumns } from '@fortawesome/free-solid-svg-icons';
+import { useParams } from 'react-router-dom';
+import { FirebaseContext } from '../../FirebaseApi';
+
+import { delay } from './utils';
 import { Description } from './Description';
+import { changeTaskTitle } from '../../Content/SingleBoard/action';
 
 export const TaskInfo = ({ task, column }) => {
+  const dispatch = useDispatch();
   const [target, setstate] = useState('');
+  const { id } = useParams();
+  const firebase = React.useContext(FirebaseContext);
 
   const handleOutsideClick = useCallback((e) => {
     setstate(e.path);
@@ -20,12 +26,21 @@ export const TaskInfo = ({ task, column }) => {
     return () => document.body.removeEventListener('click', handleOutsideClick);
   }, []);
 
+  const a = delay((e) => {
+    firebase.changeTaskTitle(id, task.id, e);
+    dispatch(changeTaskTitle(task.id, e));
+  }, 500);
+
+  const input1Change = (e) => {
+    a(e.target.value);
+  };
+
   return (
-    <div className='task-info info' id='taskInfo'>
+    <div className='task-info info' id={`taskInfo+${task.id}`}>
       <div className='info-details '>
         <div className='info-details-header '>
           <div className='info-details-header__title'>
-            <textarea defaultValue={task.title} />
+            <textarea defaultValue={task.title} onChange={input1Change} />
           </div>
           <div className='info-details-header__column'>
             в колонке
@@ -36,7 +51,13 @@ export const TaskInfo = ({ task, column }) => {
           </div>
         </div>
         <div className='info-details-main main-info'>
-          <Description key={task.id} id={task.id} target={target} />
+          <Description
+            key={task.id}
+            boardId={id}
+            id={task.id}
+            target={target}
+            description={task.description}
+          />
         </div>
         <div className='info-details-sidebar'> dddfffffffffffffffffffffff</div>
       </div>

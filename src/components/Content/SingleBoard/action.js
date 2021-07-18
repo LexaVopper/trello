@@ -65,7 +65,7 @@ export const changeColomns = (boardId, newColumnsList) => async (dispatch) => {
 
 export const changeTasks =
   (boardId, colomnId, tasksList, reduxTasksList) => async (dispatch) => {
-    firebase.changeTaksInBoard(boardId, tasksList);
+    firebase.changeTaskInBoard(boardId, tasksList);
     dispatch(changeTasksPosition(colomnId, tasksList, reduxTasksList));
   };
 
@@ -97,6 +97,16 @@ export const addColumn = (newColumn, newColumnOrder) => ({
 });
 
 export const addTask = (newTask, newColumnTask, colomnId) => ({
-  type: 'ADD_NEW_Task',
+  type: 'ADD_NEW_TASK',
   payload: { newTask, newColumnTask, colomnId },
+});
+
+export const addTaskDescription = (taskId, newDescription) => ({
+  type: 'ADD_DESCRIPTION',
+  payload: { taskId, newDescription },
+});
+
+export const changeTaskTitle = (taskId, newTitle) => ({
+  type: 'CHANGE_TASK',
+  payload: { taskId, newTitle },
 });

@@ -102,7 +102,7 @@ const getBoard = (state = initialState, action) => {
           ...action.payload.newColumnOrder,
         },
       };
-    case 'ADD_NEW_Task':
+    case 'ADD_NEW_TASK':
       return {
         ...state,
         page: {
@@ -120,6 +120,34 @@ const getBoard = (state = initialState, action) => {
           task: {
             ...state.page.task,
             ...action.payload.newTask,
+          },
+        },
+      };
+    case 'CHANGE_TASK':
+      return {
+        ...state,
+        page: {
+          ...state.page,
+          task: {
+            ...state.page.task,
+            [action.payload.taskId]: {
+              ...state.page.task[action.payload.taskId],
+              title: action.payload.newTitle,
+            },
+          },
+        },
+      };
+    case 'ADD_DESCRIPTION':
+      return {
+        ...state,
+        page: {
+          ...state.page,
+          task: {
+            ...state.page.task,
+            [action.payload.taskId]: {
+              ...state.page.task[action.payload.taskId],
+              description: action.payload.newDescription,
+            },
           },
         },
       };

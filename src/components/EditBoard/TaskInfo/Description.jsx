@@ -1,17 +1,22 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import cn from 'classnames';
 import { useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faColumns } from '@fortawesome/free-solid-svg-icons';
+import { addTaskDescription } from '../../Content/SingleBoard/action';
+import { FirebaseContext } from '../../FirebaseApi';
 
-export const Description = ({ id, target }) => {
+export const Description = ({ id, target, boardId, description }) => {
+  const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
-  const [openClose, addDespription] = useState(false);
   const ref = useRef(null);
+  const firebase = React.useContext(FirebaseContext);
 
   const onSubmit = (data) => {
-    console.log(data);
+    firebase.addTaskDescription(boardId, id, data.description);
+    dispatch(addTaskDescription(id, data.description));
   };
 
   return (
@@ -35,9 +40,11 @@ export const Description = ({ id, target }) => {
             required: true,
             pattern: { value: /\S/ },
           })}
-          placeholder='Добавить более подробное описание'
+          placeholder={description || 'Добавить более подробное описание'}
           ref={ref}
-        />
+        >
+          {description}
+        </textarea>
 
         <div className='main-info-destination__buttons'>
           <input className='button' type='submit' value='Сохранить' />

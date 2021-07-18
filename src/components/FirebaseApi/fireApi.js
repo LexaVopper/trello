@@ -76,11 +76,23 @@ class Firebase {
     });
   }
 
-  changeTaksInBoard(boardId, tasksList) {
+  changeTaskInBoard(boardId, tasksList) {
     Object.values(tasksList).forEach((task) => {
       this.db.ref().child(`db/boards/${boardId}/task/${task.id}`).update({
         position: task.position,
       });
+    });
+  }
+
+  changeTaskTitle(boardId, taskId, newTitle) {
+    this.db.ref().child(`db/boards/${boardId}/task/${taskId}`).update({
+      title: newTitle,
+    });
+  }
+
+  addTaskDescription(boardId, taskId, newDescription) {
+    this.db.ref().child(`db/boards/${boardId}/task/${taskId}`).update({
+      description: newDescription,
     });
   }
 
