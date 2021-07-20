@@ -30,7 +30,7 @@ export const Task = ({ task, index, column }) => {
         )}
       </Draggable>
       {toggleModalWindow && (
-        <Portal classModal={toggleModalWindow}>
+        <Portal classModal={toggleModalWindow} openModal={openModal}>
           <TaskInfo task={task} column={column} />
         </Portal>
       )}

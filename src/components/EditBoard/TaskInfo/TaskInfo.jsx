@@ -9,6 +9,7 @@ import { FirebaseContext } from '../../FirebaseApi';
 import { delay } from './utils';
 import { Description } from './Description';
 import { changeTaskTitle } from '../../Content/SingleBoard/action';
+import { SideBar } from './SideBar/SideBar';
 
 export const TaskInfo = ({ task, column }) => {
   const dispatch = useDispatch();
@@ -21,9 +22,10 @@ export const TaskInfo = ({ task, column }) => {
   }, []);
 
   useEffect(() => {
-    document.body.addEventListener('click', handleOutsideClick);
+    document.body.addEventListener('mousedown', handleOutsideClick);
 
-    return () => document.body.removeEventListener('click', handleOutsideClick);
+    return () =>
+      document.body.removeEventListener('mousedown', handleOutsideClick);
   }, []);
 
   const a = delay((e) => {
@@ -59,7 +61,9 @@ export const TaskInfo = ({ task, column }) => {
             description={task.description}
           />
         </div>
-        <div className='info-details-sidebar'> dddfffffffffffffffffffffff</div>
+        <div className='info-details-sidebar'>
+          <SideBar />
+        </div>
       </div>
     </div>
   );

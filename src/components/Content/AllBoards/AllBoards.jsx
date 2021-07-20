@@ -65,61 +65,65 @@ function AllBoards() {
           </div>
         </div>
       </div>
-      <Portal classModal={toggleModalWindow}>
-        <div className='creating-board create'>
-          <form
-            className='create__name'
-            onSubmit={handleSubmit(onSubmit)}
-            style={{ backgroundColor: colors[position] }}
-          >
-            <input
-              id='boardName'
-              type='text'
-              {...register('boardName', {
-                required: true,
-                pattern: { value: /\S/ },
-              })}
-              placeholder='Добавте заголовок доски'
-              onChange={(e) => allowCreating(e.target.value)}
-            />
-
-            <span className='create__name-room'>VopperRoom </span>
-            <div className='create__delete' onClick={() => openCloseBoard()}>
-              <FontAwesomeIcon
-                icon={faPlus}
-                className='create__delete --icon'
+      {toggleModalWindow && (
+        <Portal classModal={toggleModalWindow} openModal={openModal}>
+          <div className='creating-board create'>
+            <form
+              className='create__name'
+              onSubmit={handleSubmit(onSubmit)}
+              style={{ backgroundColor: colors[position] }}
+            >
+              <input
+                id='boardName'
+                type='text'
+                {...register('boardName', {
+                  required: true,
+                  pattern: { value: /\S/ },
+                })}
+                placeholder='Добавте заголовок доски'
+                onChange={(e) => allowCreating(e.target.value)}
               />
-            </div>
-            <input
-              type='submit'
-              value='Создать доску'
-              disabled={toggleSubmit}
-            />
-          </form>
 
-          <ul className='create__colors'>
-            {colors.map((color, index) => (
-              <li
-                className='create__block block'
-                key={color + index}
-                style={{ backgroundColor: colors[index] }}
-              >
-                <div
-                  className={cn('block__layer', { active: index === position })}
-                  onClick={() => setColor(index)}
+              <span className='create__name-room'>VopperRoom </span>
+              <div className='create__delete' onClick={() => openCloseBoard()}>
+                <FontAwesomeIcon
+                  icon={faPlus}
+                  className='create__delete --icon'
+                />
+              </div>
+              <input
+                type='submit'
+                value='Создать доску'
+                disabled={toggleSubmit}
+              />
+            </form>
+
+            <ul className='create__colors'>
+              {colors.map((color, index) => (
+                <li
+                  className='create__block block'
+                  key={color + index}
+                  style={{ backgroundColor: colors[index] }}
                 >
-                  <span>
-                    <FontAwesomeIcon
-                      icon={faCheck}
-                      className='block__layer--icon'
-                    />
-                  </span>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Portal>
+                  <div
+                    className={cn('block__layer', {
+                      active: index === position,
+                    })}
+                    onClick={() => setColor(index)}
+                  >
+                    <span>
+                      <FontAwesomeIcon
+                        icon={faCheck}
+                        className='block__layer--icon'
+                      />
+                    </span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Portal>
+      )}
     </div>
   );
 }
