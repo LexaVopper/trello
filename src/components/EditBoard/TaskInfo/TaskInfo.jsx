@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -22,10 +21,9 @@ export const TaskInfo = ({ task, column }) => {
   }, []);
 
   useEffect(() => {
-    document.body.addEventListener('mousedown', handleOutsideClick);
+    document.body.addEventListener('click', handleOutsideClick);
 
-    return () =>
-      document.body.removeEventListener('mousedown', handleOutsideClick);
+    return () => document.body.removeEventListener('click', handleOutsideClick);
   }, []);
 
   const a = delay((e) => {
@@ -61,9 +59,7 @@ export const TaskInfo = ({ task, column }) => {
             description={task.description}
           />
         </div>
-        <div className='info-details-sidebar'>
-          <SideBar />
-        </div>
+        <SideBar />
       </div>
     </div>
   );

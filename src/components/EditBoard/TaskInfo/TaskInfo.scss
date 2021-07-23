@@ -1,12 +1,12 @@
 .task-info {
   background-color: #f4f5f7;
   border-radius: 2px;
-  overflow: hidden;
   position: relative;
   width: 768px;
 }
 .info-details {
   min-height: 600px;
+  padding-top: 10px;
 
   &-header {
     padding: 8px 0 0 8px;
@@ -73,7 +73,6 @@
     float: right;
     padding: 0 16px 8px 8px;
     min-width: calc(100% - 600px);
-    overflow: hidden;
   }
 }
 
@@ -83,7 +82,7 @@
   min-height: 32px;
   position: relative;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   flex-direction: column;
 
   &__title {
@@ -95,7 +94,7 @@
   &__text {
     margin-top: 10px;
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     flex-direction: column;
     textarea {
       background-color: rgba(9, 30, 66, 0.04);
@@ -132,7 +131,7 @@
     margin-top: 10px;
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     visibility: hidden;
   }

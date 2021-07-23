@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable no-unused-vars */
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleModalOpen } from './openModal';
 
@@ -9,13 +10,11 @@ const Modal = React.memo(function Modal({
 }) {
   const dispatch = useDispatch();
   const currentModalId = useSelector((state) => state?.checkModalOpen?.modalId);
-  const [toggle, setState] = useState(false);
+
   const openModalWindow = () => {
-    if (!toggle) {
-      setState(true);
+    if (!currentModalId) {
       dispatch(toggleModalOpen(currentId));
     } else {
-      setState(false);
       dispatch(toggleModalOpen(''));
     }
   };

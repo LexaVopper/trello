@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import cn from 'classnames';
@@ -40,7 +39,7 @@ export const Description = ({ id, target, boardId, description }) => {
             required: true,
             pattern: { value: /\S/ },
           })}
-          placeholder={description || 'Добавить более подробное описание'}
+          value={description || 'Добавить более подробное описание'}
           ref={ref}
         >
           {description}
@@ -51,7 +50,6 @@ export const Description = ({ id, target, boardId, description }) => {
           <FontAwesomeIcon
             icon={faPlus}
             className='main-info-destination__delete --icon'
-            onClick={() => console.log('sss')}
           />
         </div>
       </form>
