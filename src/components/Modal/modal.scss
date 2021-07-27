@@ -1,5 +1,5 @@
 .modal {
-  width: 280px;
+  width: 305px;
   max-height: 523px;
   background-color: rgb(255, 255, 255);
   top: 45px;
@@ -14,7 +14,7 @@
 
   &__content {
     max-height: 507px;
-    margin: 8px 4px 8px 8px;
+    margin: 10px;
     overflow-x: hidden;
     background-color: rgb(255, 255, 255);
     display: flex;

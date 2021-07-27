@@ -96,6 +96,14 @@ class Firebase {
     });
   }
 
+  createTag(boardId, colorTag, titleTag, tagId) {
+    this.db.ref().child(`db/boards/${boardId}/tags/${tagId}`).update({
+      id: tagId,
+      title: titleTag,
+      color: colorTag,
+    });
+  }
+
   changeTaksBetweenBoards(
     boardId,
     tasksList,

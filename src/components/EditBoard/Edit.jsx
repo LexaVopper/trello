@@ -18,14 +18,13 @@ const Edit = React.memo(function Edit() {
   const [toggle, self_Invite] = useState(false);
   const emailNotFound = useSelector((state) => state.checkEmail?.error);
   const userEmail = useSelector((state) => state.getUser?.user?.email);
-  const rerender = useSelector((state) => state.getBoard.rerender);
   const boardColor = useSelector((state) => state.getBoard.page?.color);
   const error = useSelector((state) => state.getBoard?.error);
   // const loader = useSelector((state) => state.getBoard?.isLoading);
 
   useEffect(() => {
     dispatch(getBoard(id));
-  }, [rerender]);
+  }, []);
 
   const onSubmit = (data) => {
     if (data.user === userEmail) {

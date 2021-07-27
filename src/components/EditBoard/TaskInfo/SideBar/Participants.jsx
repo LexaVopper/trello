@@ -12,11 +12,11 @@ export const Participants = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
 
-  //   React.useEffect(() => {
-  //     return () => {
-  //       dispatch(toggleModalOpen(''));
-  //     };
-  //   }, []);
+  // React.useEffect(() => {
+  //   return () => {
+  //     dispatch(toggleModalOpen(''));
+  //   };
+  // }, []);
 
   const onSubmit = (data) => {};
 
@@ -33,17 +33,17 @@ export const Participants = () => {
         )}
         currentId='participants'
       >
-        <form onSubmit={onSubmit} className='sidebar-tile form-participants'>
-          <span className='form-participants__title'>Участники</span>
+        <form onSubmit={onSubmit} className='form-taskInfo'>
+          <span className='form-taskInfo__title'>Участники</span>
 
           <input
             {...register('participants')}
             placeholder='Поиск участников'
-            className='form-participants__search'
+            className='form-taskInfo__search'
           />
-          <span className='form-participants__secTitle'> Участники доски</span>
+          <span className='form-taskInfo__secTitle'> Участники доски</span>
 
-          <input type='submit' className='form-participants__submit' />
+          <input type='submit' className='form-taskInfo__submit' />
         </form>
       </Modal>
     </div>

@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import React, { useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
+
 import Portal from '../Modal/Portal';
 import { TaskInfo } from './TaskInfo/TaskInfo';
 
@@ -20,7 +21,7 @@ export const Task = ({ task, index, column }) => {
             ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
-            onClick={(e) => openCloseTask(e)}
+            onClick={() => openCloseTask()}
           >
             <div className='task-details '>
               <span className='task-details__title'>{task.title}</span>

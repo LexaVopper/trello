@@ -1,10 +1,9 @@
 const initialState = {
-  page: { task: {}, columns: {} },
+  page: { task: {}, columns: {}, tags: {} },
   columnOrder: {},
   id: '',
   error: false,
   isLoading: false,
-  rerender: false,
 };
 
 const getBoard = (state = initialState, action) => {
@@ -30,11 +29,6 @@ const getBoard = (state = initialState, action) => {
         isLoading: true,
       };
 
-    case 'GET_RERENDER':
-      return {
-        ...state,
-        rerender: action.payload,
-      };
     case 'CHANGE_COLOMNS_POSITION':
       return {
         ...state,
@@ -137,6 +131,22 @@ const getBoard = (state = initialState, action) => {
           },
         },
       };
+    case 'CREATE_TAG':
+      return {
+        ...state,
+        page: {
+          ...state.page,
+          tags: {
+            ...state.page.tags,
+            [action.payload.tagId]: {
+              id: action.payload.tagId,
+              title: action.payload.titleTag,
+              color: action.payload.colorTag,
+            },
+          },
+        },
+      };
+
     case 'ADD_DESCRIPTION':
       return {
         ...state,
@@ -154,12 +164,11 @@ const getBoard = (state = initialState, action) => {
     case 'CLEAR_BOARD_COLUMNS':
       return {
         ...state,
-        page: { task: {}, columns: {} },
+        page: { task: {}, columns: {}, tags: {} },
         columnOrder: {},
         id: '',
         error: false,
         isLoading: false,
-        rerender: false,
       };
     default:
       return state;

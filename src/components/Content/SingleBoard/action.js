@@ -25,10 +25,7 @@ export const changeColomnsPosition = (newColumnsList) => ({
   type: 'CHANGE_COLOMNS_POSITION',
   payload: newColumnsList,
 });
-export const getRerender = (status) => ({
-  type: 'GET_RERENDER',
-  payload: status,
-});
+
 export const changeTasksPosition = (colomnId, tasksList, reduxTasksList) => ({
   type: 'CHANGE_TASKS_POSITION',
   payload: { colomnId, tasksList, reduxTasksList },
@@ -110,3 +107,14 @@ export const changeTaskTitle = (taskId, newTitle) => ({
   type: 'CHANGE_TASK',
   payload: { taskId, newTitle },
 });
+
+export const createTagRedux = (colorTag, titleTag, tagId) => ({
+  type: 'CREATE_TAG',
+  payload: { colorTag, titleTag, tagId },
+});
+
+export const createTags =
+  (boardId, colorTag, titleTag, tagId) => async (dispatch) => {
+    firebase.createTag(boardId, colorTag, titleTag, tagId);
+    dispatch(createTagRedux(colorTag, titleTag, tagId));
+  };

@@ -12,10 +12,10 @@ const Modal = React.memo(function Modal({
   const currentModalId = useSelector((state) => state?.checkModalOpen?.modalId);
 
   const openModalWindow = () => {
-    if (!currentModalId) {
-      dispatch(toggleModalOpen(currentId));
-    } else {
+    if (currentModalId === currentId) {
       dispatch(toggleModalOpen(''));
+    } else {
+      dispatch(toggleModalOpen(currentId));
     }
   };
 
