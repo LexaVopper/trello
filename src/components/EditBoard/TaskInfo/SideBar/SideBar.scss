@@ -87,9 +87,21 @@
     color: black;
   }
 
+  &__delete {
+    margin-top: 30px;
+    padding: 0 10px 0 10px;
+    background-color: red;
+    &:hover {
+      background-color: rgb(114, 13, 13);
+    }
+  }
+
   &__submit {
     margin-top: 30px;
     visibility: hidden;
+    padding: 0 10px 0 10px;
+    resize: none;
+
     &.active {
       visibility: visible;
     }
@@ -100,11 +112,12 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     min-height: 20px;
     justify-content: space-between;
   }
   &__select {
+    color: white;
   }
   &__body {
     flex-direction: row;
@@ -117,6 +130,7 @@
     border-radius: 3px;
     padding: 8px 12px;
     display: flex;
+    color: white;
     &:hover {
       width: 232px;
 
@@ -128,7 +142,7 @@
     border-radius: 3px;
     border: none;
     line-height: 20px;
-    margin-bottom: 8px;
+    margin: 10px 0 8px 0;
     padding: 6px 12px;
     text-decoration: none;
     background-color: #091e420a;
@@ -138,7 +152,6 @@
       background-color: #091e4214;
     }
   }
-
   &__edit {
     display: flex;
     justify-content: center;
@@ -146,6 +159,7 @@
     width: 32px;
     height: 32px;
     border-radius: 3px;
+
     &:hover {
       background-color: #091e4214;
     }

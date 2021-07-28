@@ -12,11 +12,11 @@ export const Participants = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
 
-  // React.useEffect(() => {
-  //   return () => {
-  //     dispatch(toggleModalOpen(''));
-  //   };
-  // }, []);
+  React.useEffect(() => {
+    return () => {
+      dispatch(toggleModalOpen(''));
+    };
+  }, []);
 
   const onSubmit = (data) => {};
 

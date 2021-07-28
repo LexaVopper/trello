@@ -146,7 +146,6 @@ const getBoard = (state = initialState, action) => {
           },
         },
       };
-
     case 'ADD_DESCRIPTION':
       return {
         ...state,

@@ -104,6 +104,13 @@ class Firebase {
     });
   }
 
+  deleteTag(boardId, tagId) {
+    this.db
+      .ref()
+      .child(`db/boards/${boardId}/tags/${tagId}`)
+      .set({ tagId: {} });
+  }
+
   changeTaksBetweenBoards(
     boardId,
     tasksList,

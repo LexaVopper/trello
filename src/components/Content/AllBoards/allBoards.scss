@@ -247,4 +247,10 @@
   &__description {
     color: #5e6c84;
   }
+  &__buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+  }
 }
