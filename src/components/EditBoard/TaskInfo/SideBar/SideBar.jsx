@@ -2,14 +2,14 @@ import React from 'react';
 import { Participants } from './Participants';
 import { Tags } from './Tags';
 
-export const SideBar = () => {
+export const SideBar = ({ taskId }) => {
   return (
     <div className='info-details-sidebar sidebar'>
       <div className='sidebar__title'>Добавить на карточку</div>
 
       <Participants />
 
-      <Tags />
+      <Tags taskId={taskId} />
     </div>
   );
 };

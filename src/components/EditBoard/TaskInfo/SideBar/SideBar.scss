@@ -118,6 +118,10 @@
   }
   &__select {
     color: white;
+    visibility: hidden;
+    &.active {
+      visibility: visible;
+    }
   }
   &__body {
     flex-direction: row;

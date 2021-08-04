@@ -153,6 +153,20 @@ class Firebase {
       .child(`${boardId}`)
       .set({ id: boardId });
   }
+
+  tieTagWithTask(boardId, taskId, tagId) {
+    this.db
+      .ref()
+      .child(`db/boards/${boardId}/task/${taskId}/tags`)
+      .update({ [tagId]: { id: tagId } });
+  }
+
+  deleteTagFromTask(boardId, taskId, tagId) {
+    this.db
+      .ref()
+      .child(`db/boards/${boardId}/task/${taskId}/tags`)
+      .update({ [tagId]: {} });
+  }
 }
 
 export default new Firebase();

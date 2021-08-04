@@ -1,5 +1,9 @@
 const initialState = {
-  page: { task: {}, columns: {}, tags: {} },
+  page: {
+    task: {},
+    columns: {},
+    tags: {},
+  },
   columnOrder: {},
   id: '',
   error: false,
@@ -156,6 +160,23 @@ const getBoard = (state = initialState, action) => {
             [action.payload.taskId]: {
               ...state.page.task[action.payload.taskId],
               description: action.payload.newDescription,
+            },
+          },
+        },
+      };
+    case 'TIE_TAG_WITH_TASK':
+      return {
+        ...state,
+        page: {
+          ...state.page,
+          task: {
+            ...state.page.task,
+            [action.payload.taskId]: {
+              ...state.page.task[action.payload.taskId],
+              tags: {
+                ...state.page.task[action.payload.taskId]?.tags,
+                [action.payload.tagId]: { id: action.payload.tagId },
+              },
             },
           },
         },

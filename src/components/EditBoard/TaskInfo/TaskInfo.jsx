@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faColumns } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
@@ -9,12 +10,14 @@ import { delay } from './utils';
 import { Description } from './Description';
 import { changeTaskTitle } from '../../Content/SingleBoard/action';
 import { SideBar } from './SideBar/SideBar';
+import { TagsMainBoard } from './TagsMainBoard';
 
 export const TaskInfo = ({ task, column }) => {
   const dispatch = useDispatch();
   const [target, setstate] = useState('');
   const { id } = useParams();
   const firebase = React.useContext(FirebaseContext);
+  const tags = useSelector((state) => state.getBoard.page.task.tags);
 
   const handleOutsideClick = useCallback((e) => {
     setstate(e.path);
@@ -51,6 +54,7 @@ export const TaskInfo = ({ task, column }) => {
           </div>
         </div>
         <div className='info-details-main main-info'>
+          {/* {tags && <TagsMainBoard tags={tags} />} */}
           <Description
             key={task.id}
             boardId={id}
@@ -59,7 +63,7 @@ export const TaskInfo = ({ task, column }) => {
             description={task.description}
           />
         </div>
-        <SideBar />
+        <SideBar taskId={task.id} />
       </div>
     </div>
   );

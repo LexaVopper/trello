@@ -118,3 +118,8 @@ export const createTags =
     firebase.createTag(boardId, colorTag, titleTag, tagId);
     dispatch(createTagRedux(colorTag, titleTag, tagId));
   };
+
+export const tieTagWithTask = (taskId, tagId) => ({
+  type: 'TIE_TAG_WITH_TASK',
+  payload: { taskId, tagId },
+});
