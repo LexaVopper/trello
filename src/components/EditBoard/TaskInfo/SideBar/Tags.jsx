@@ -12,6 +12,7 @@ import Modal from '../../../Modal/Modal';
 import { tieTagWithTask } from '../../../Content/SingleBoard/action';
 
 import { CreateEditTag } from './CreateEditTag';
+import { TagForm } from './TagForm';
 
 export const Tags = ({ taskId }) => {
   const dispatch = useDispatch();
@@ -59,58 +60,7 @@ export const Tags = ({ taskId }) => {
         )}
         currentId='tags'
       >
-        <div className='form-taskInfo'>
-          {mode === 'main' && (
-            <>
-              <span className='form-taskInfo__title'>Метки</span>
-              <input
-                placeholder='Поиск меток...'
-                className='form-taskInfo__search'
-              />
-              <span className='form-taskInfo__secTitle'>Метки</span>
-              <div className='form-taskInfo-tags tags'>
-                {Object.values(tags).map((tag, index) => (
-                  <div className='tags__single' key={tag.id + index}>
-                    <div
-                      className={cn('tags__body', {
-                        active: '',
-                      })}
-                      style={{ backgroundColor: tag.color }}
-                      onClick={() => ChooseTag(tag.id)}
-                    >
-                      <div className='tags__title'> {tag.title} </div>
-                      <div
-                        className={cn('tags__select', {
-                          active: tagsInTask[tag.id],
-                        })}
-                      >
-                        <FontAwesomeIcon icon={faCheck} className='menu-icon' />
-                      </div>
-                    </div>
-                    <div
-                      className='tags__edit'
-                      onClick={() => EditMode(tag.id)}
-                    >
-                      <FontAwesomeIcon icon={faPen} className='menu-icon' />
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <button
-                className='tags__button'
-                onClick={() => createTag('create')}
-              >
-                Создать новую метку
-              </button>
-            </>
-          )}
-          <CreateEditTag
-            chosenTag={chosenTag}
-            mode={mode}
-            createTag={createTag}
-            tags={tags}
-          />
-        </div>
+        <TagForm taskId={taskId} />
       </Modal>
     </div>
   );
