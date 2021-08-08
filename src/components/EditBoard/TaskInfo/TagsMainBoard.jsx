@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from '../../Modal/Modal';
-import { TagForm } from './SideBar/TagForm';
+import { TagForm } from './SideBar/Tags/TagForm';
 
 export const TagsMainBoard = ({ tags, taskId }) => {
   const dispatch = useDispatch();

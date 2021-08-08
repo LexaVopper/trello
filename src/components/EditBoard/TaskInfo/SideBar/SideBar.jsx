@@ -1,6 +1,6 @@
 import React from 'react';
 import { Participants } from './Participants';
-import { Tags } from './Tags';
+import { Tags } from './Tags/Tags';
 
 export const SideBar = ({ taskId }) => {
   return (

@@ -6,12 +6,12 @@ import { faPen, faTag, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 import { useParams } from 'react-router-dom';
-import { FirebaseContext } from '../../../FirebaseApi';
-import { toggleModalOpen } from '../../../Modal/openModal';
-import Modal from '../../../Modal/Modal';
-import { tieTagWithTask } from '../../../Content/SingleBoard/action';
+import { FirebaseContext } from '../../../../FirebaseApi';
+import { toggleModalOpen } from '../../../../Modal/openModal';
+import Modal from '../../../../Modal/Modal';
+import { tieTagWithTask } from '../../../../Content/SingleBoard/action';
 
-import { CreateEditTag } from './CreateEditTag';
+import { CreateEditTag } from '../CreateEditTag';
 import { TagForm } from './TagForm';
 
 export const Tags = ({ taskId }) => {

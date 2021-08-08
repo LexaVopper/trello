@@ -18,7 +18,7 @@ export const TaskInfo = ({ task, column }) => {
   const { id } = useParams();
   const firebase = React.useContext(FirebaseContext);
   const tags = useSelector((state) => state.getBoard.page.task[task.id].tags);
-  console.log(task.id, 's');
+
   const handleOutsideClick = useCallback((e) => {
     setstate(e.path);
   }, []);

@@ -6,11 +6,13 @@ import { faPen, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 import { useParams } from 'react-router-dom';
-import { FirebaseContext } from '../../../FirebaseApi';
+import { FirebaseContext } from '../../../../FirebaseApi';
 
-import { tieTagWithTask } from '../../../Content/SingleBoard/action';
+import { tieTagWithTask } from '../../../../Content/SingleBoard/action';
+import { filterTags } from '../actions';
 
-import { CreateEditTag } from './CreateEditTag';
+import { CreateEditTag } from '../CreateEditTag';
+import { findTags } from '../selector';
 
 export const TagForm = ({ taskId }) => {
   const dispatch = useDispatch();
@@ -20,6 +22,7 @@ export const TagForm = ({ taskId }) => {
 
   const [chosenTag, takeTag] = useState(null);
   const tags = useSelector((state) => state.getBoard.page?.tags);
+  const filterTagsBy = useSelector((state) => state.filter.filterTagsBy);
   const tagsInTask = useSelector(
     (state) => state.getBoard.page?.task[taskId]?.tags || {}
   );
@@ -38,6 +41,11 @@ export const TagForm = ({ taskId }) => {
       delete tagsInTask[tagId];
     }
   };
+
+  const findTag = (param) => {
+    dispatch(filterTags(param));
+  };
+
   return (
     <div className='form-taskInfo'>
       {mode === 'main' && (
@@ -46,11 +54,12 @@ export const TagForm = ({ taskId }) => {
           <input
             placeholder='Поиск меток...'
             className='form-taskInfo__search'
+            onChange={(e) => findTag(e.target.value)}
           />
           <span className='form-taskInfo__secTitle'>Метки</span>
           <div className='form-taskInfo-tags tags'>
-            {Object.values(tags).map((tag, index) => (
-              <div className='tags__single' key={tag.id + index}>
+            {findTags(tags, filterTagsBy).map((tag, index) => (
+              <div className='tags__single' key={tag.id}>
                 <div
                   className={cn('tags__body', {
                     active: '',
