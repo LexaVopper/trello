@@ -59,7 +59,7 @@ export const TagForm = ({ taskId }) => {
           <span className='form-taskInfo__secTitle'>Метки</span>
           <div className='form-taskInfo-tags tags'>
             {findTags(tags, filterTagsBy).map((tag, index) => (
-              <div className='tags__single' key={tag.id}>
+              <div className='tags__single' key={(tag.id, index)}>
                 <div
                   className={cn('tags__body', {
                     active: '',

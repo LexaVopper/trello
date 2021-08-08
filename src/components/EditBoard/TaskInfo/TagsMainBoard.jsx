@@ -15,10 +15,11 @@ export const TagsMainBoard = ({ tags, taskId }) => {
       <div className='tags-main__colors'>
         {Object.values(tags).map((tag, index) => (
           <Modal
+            key={tag.id + index}
             target={({ onClick }) => (
               <div
                 className='tags-main__color'
-                key={tag.id}
+                key={(tag.id, index)}
                 style={{ backgroundColor: allTags[tag.id].color }}
                 onClick={onClick}
               >
