@@ -39,11 +39,10 @@ export const Description = ({ id, target, boardId, description }) => {
             required: true,
             pattern: { value: /\S/ },
           })}
-          value={description || 'Добавить более подробное описание'}
+          defaultValue={description}
+          placeholder='Добавить более подробное описание'
           ref={ref}
-        >
-          {description}
-        </textarea>
+        />
 
         <div className='main-info-destination__buttons'>
           <input className='button' type='submit' value='Сохранить' />

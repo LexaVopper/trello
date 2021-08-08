@@ -17,7 +17,9 @@ export const TaskInfo = ({ task, column }) => {
   const [target, setstate] = useState('');
   const { id } = useParams();
   const firebase = React.useContext(FirebaseContext);
-  const tags = useSelector((state) => state.getBoard.page.task[task.id].tags);
+  const tags = useSelector(
+    (state) => state.getBoard.page.task[task.id].tags || {}
+  );
 
   const handleOutsideClick = useCallback((e) => {
     setstate(e.path);
@@ -54,7 +56,11 @@ export const TaskInfo = ({ task, column }) => {
           </div>
         </div>
         <div className='info-details-main main-info'>
-          {tags && <TagsMainBoard tags={tags} taskId={task.id} />}
+          {Object.keys(tags).length ? (
+            <TagsMainBoard tags={tags} taskId={task.id} />
+          ) : (
+            ''
+          )}
           <Description
             key={task.id}
             boardId={id}
