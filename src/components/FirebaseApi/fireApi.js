@@ -104,6 +104,13 @@ class Firebase {
     });
   }
 
+  createСheck(boardId, titleCheck, checkId) {
+    this.db.ref().child(`db/boards/${boardId}/checkList/${checkId}`).update({
+      id: checkId,
+      title: titleCheck,
+    });
+  }
+
   deleteTag(boardId, tagId) {
     this.db
       .ref()

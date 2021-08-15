@@ -103,6 +103,11 @@ export const addTaskDescription = (taskId, newDescription) => ({
   payload: { taskId, newDescription },
 });
 
+export const addCheck = (checkId, checkTitle) => ({
+  type: 'ADD_CHECK',
+  payload: { checkId, checkTitle },
+});
+
 export const changeTaskTitle = (taskId, newTitle) => ({
   type: 'CHANGE_TASK',
   payload: { taskId, newTitle },
