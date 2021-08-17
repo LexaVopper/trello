@@ -3,7 +3,6 @@ const initialState = {
     task: {},
     columns: {},
     tags: {},
-    checkList: {},
   },
   columnOrder: {},
   id: '',
@@ -170,11 +169,17 @@ const getBoard = (state = initialState, action) => {
         ...state,
         page: {
           ...state.page,
-          checkList: {
-            ...state.page.checkList,
-            [action.payload.checkId]: {
-              id: action.payload.checkId,
-              title: action.payload.checkTitle,
+          task: {
+            ...state.page.task,
+            [action.payload.taskId]: {
+              ...state.page.task[action.payload.taskId],
+              checks: {
+                ...state.page.task[action.payload.taskId].checks,
+                [action.payload.checkId]: {
+                  id: action.payload.checkId,
+                  title: action.payload.checkTitle,
+                },
+              },
             },
           },
         },
@@ -199,7 +204,7 @@ const getBoard = (state = initialState, action) => {
     case 'CLEAR_BOARD_COLUMNS':
       return {
         ...state,
-        page: { task: {}, columns: {}, tags: {}, checkList: {} },
+        page: { task: {}, columns: {}, tags: {} },
         columnOrder: {},
         id: '',
         error: false,
