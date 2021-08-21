@@ -112,6 +112,26 @@ class Firebase {
         id: checkId,
         title: titleCheck,
       });
+    this.db.ref().child(`db/boards/${boardId}/checks/${checkId}`).update({
+      id: checkId,
+      title: titleCheck,
+    });
+  }
+
+  copyСheck(boardId, check, checkId, taskId) {
+    this.db
+      .ref()
+      .child(`db/boards/${boardId}/task/${taskId}/checks/${checkId}`)
+      .update({
+        id: check.id,
+        title: check.title,
+      });
+    this.db
+      .ref()
+      .child(`db/boards/${boardId}/checks`)
+      .update({
+        [checkId]: check,
+      });
   }
 
   deleteTag(boardId, tagId) {

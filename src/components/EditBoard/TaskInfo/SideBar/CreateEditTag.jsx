@@ -65,11 +65,7 @@ export const CreateEditTag = ({ chosenTag, mode, createTag, tags }) => {
 
   return (
     <div className='sidebar-tile'>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className='form-taskInfo'
-        autoComplete='off'
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className='form-taskInfo'>
         {mode === 'create' && (
           <>
             <span className='form-taskInfo__title'>Создание метки</span>

@@ -14,3 +14,13 @@ export const findChecks = (taskList) => {
 
   return Object.values(foundChecks);
 };
+
+export const copyChecks = (oldCheck, id, title) => {
+  const newChecks = {
+    ...oldCheck,
+    id,
+    title,
+  };
+
+  return newChecks;
+};

@@ -21,7 +21,7 @@ export const TagForm = ({ taskId }) => {
   const { id } = useParams();
 
   const [chosenTag, takeTag] = useState(null);
-  const tags = useSelector((state) => state.getBoard.page?.tags);
+  const tags = useSelector((state) => state.getBoard.page?.tags || {});
   const filterTagsBy = useSelector((state) => state.filter.filterTagsBy);
   const tagsInTask = useSelector(
     (state) => state.getBoard.page?.task[taskId]?.tags || {}
