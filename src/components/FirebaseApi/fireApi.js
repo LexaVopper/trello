@@ -134,6 +134,26 @@ class Firebase {
       });
   }
 
+  changeСheckTitle(boardId, title, checkId, taskId) {
+    this.db
+      .ref()
+      .child(`db/boards/${boardId}/task/${taskId}/checks/${checkId}`)
+      .update({
+        title,
+      });
+    this.db.ref().child(`db/boards/${boardId}/checks/${checkId}`).update({
+      title,
+    });
+  }
+
+  deleteСheck(boardId, checkId, taskId) {
+    this.db
+      .ref()
+      .child(`db/boards/${boardId}/task/${taskId}/checks/${checkId}`)
+      .set({});
+    this.db.ref().child(`db/boards/${boardId}/checks/${checkId}`).set({});
+  }
+
   deleteTag(boardId, tagId) {
     this.db
       .ref()

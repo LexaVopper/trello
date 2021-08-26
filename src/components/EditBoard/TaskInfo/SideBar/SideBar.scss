@@ -98,6 +98,21 @@
       background-color: rgb(114, 13, 13);
     }
   }
+  &__delete-check {
+    margin-top: 30px;
+    height: 32px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 0 10px 0 10px;
+    background-color: red;
+    width: 100%;
+    color: #fff;
+    font-size: 15px;
+    &:hover {
+      background-color: rgb(114, 13, 13);
+    }
+  }
 
   &__submit {
     margin-top: 30px;

@@ -77,7 +77,7 @@ export const TaskInfo = ({ task, column }) => {
             target={target}
             description={task.description}
           />
-          {checks ? <ChecksMain taskId={task.id} checks={checks} /> : ''}
+          {checks ? <ChecksMain taskId={task.id} /> : ''}
         </div>
         <SideBar taskId={task.id} />
       </div>

@@ -8,8 +8,6 @@ export const delay = (callback, ms) => {
   return function () {
     const context = this,
       args = arguments;
-    console.log(args);
-
     clearTimeout(timer);
     timer = setTimeout(() => {
       callback.apply(context, args);
