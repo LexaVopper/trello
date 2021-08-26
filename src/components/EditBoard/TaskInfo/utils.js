@@ -5,10 +5,11 @@
 
 export const delay = (callback, ms) => {
   let timer = 0;
-
   return function () {
     const context = this,
       args = arguments;
+    console.log(args);
+
     clearTimeout(timer);
     timer = setTimeout(() => {
       callback.apply(context, args);

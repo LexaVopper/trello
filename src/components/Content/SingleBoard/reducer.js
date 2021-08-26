@@ -216,6 +216,35 @@ const getBoard = (state = initialState, action) => {
           },
         },
       };
+    case 'CHANGE_CHECK_TITLE':
+      return {
+        ...state,
+        page: {
+          ...state.page,
+          task: {
+            ...state.page.task,
+            [action.payload.taskId]: {
+              ...state.page.task[action.payload.taskId],
+              checks: {
+                ...state.page.task[action.payload.taskId].checks,
+                [action.payload.checkId]: {
+                  ...state.page.task[action.payload.taskId].checks[
+                    action.payload.checkId
+                  ],
+                  title: action.payload.title,
+                },
+              },
+            },
+          },
+          checks: {
+            ...state.page.checks,
+            [action.payload.checkId]: {
+              ...state.page.checks[action.payload.checkId],
+              title: action.payload.title,
+            },
+          },
+        },
+      };
     case 'TIE_TAG_WITH_TASK':
       return {
         ...state,

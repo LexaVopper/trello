@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTag } from '@fortawesome/free-solid-svg-icons';
+import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
 import Modal from '../../../../Modal/Modal';
 import { CheckForm } from './CheckForm';
 
@@ -13,7 +13,7 @@ export const CheckList = ({ taskId }) => {
         target={({ onClick }) => (
           <div className='sidebar-tile__contant' onClick={onClick}>
             <div className='sidebar-tile__icon'>
-              <FontAwesomeIcon icon={faTag} className='menu-icon' />
+              <FontAwesomeIcon icon={faCheckSquare} className='menu-icon' />
             </div>
             <div className='sidebar-tile__name'>Чек-Лист</div>
           </div>

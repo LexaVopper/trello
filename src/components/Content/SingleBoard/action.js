@@ -111,6 +111,10 @@ export const copyCheck = (checkId, check, taskId) => ({
   type: 'COPY_CHECK',
   payload: { checkId, check, taskId },
 });
+export const changeCheckTitle = (checkId, taskId, title) => ({
+  type: 'CHANGE_CHECK_TITLE',
+  payload: { checkId, taskId, title },
+});
 
 export const changeTaskTitle = (taskId, newTitle) => ({
   type: 'CHANGE_TASK',

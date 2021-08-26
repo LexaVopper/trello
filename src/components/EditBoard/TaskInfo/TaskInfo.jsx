@@ -11,6 +11,7 @@ import { Description } from './Description';
 import { changeTaskTitle } from '../../Content/SingleBoard/action';
 import { SideBar } from './SideBar/SideBar';
 import { TagsMainBoard } from './TagsMainBoard';
+import { ChecksMain } from './ChecksMain';
 
 export const TaskInfo = ({ task, column }) => {
   const dispatch = useDispatch();
@@ -19,6 +20,9 @@ export const TaskInfo = ({ task, column }) => {
   const firebase = React.useContext(FirebaseContext);
   const tags = useSelector(
     (state) => state.getBoard.page.task[task.id].tags || {}
+  );
+  const checks = useSelector(
+    (state) => state.getBoard.page.task[task.id].checks
   );
 
   const handleOutsideClick = useCallback((e) => {
@@ -36,8 +40,10 @@ export const TaskInfo = ({ task, column }) => {
     dispatch(changeTaskTitle(task.id, e));
   }, 500);
 
-  const input1Change = (e) => {
-    a(e.target.value);
+  const input1Change = (title, e) => {
+    if (title !== e.target.value.trim()) {
+      a(e.target.value.trim());
+    }
   };
 
   return (
@@ -45,7 +51,10 @@ export const TaskInfo = ({ task, column }) => {
       <div className='info-details '>
         <div className='info-details-header '>
           <div className='info-details-header__title'>
-            <textarea defaultValue={task.title} onChange={input1Change} />
+            <textarea
+              defaultValue={task.title}
+              onChange={(e) => input1Change(task.title, e)}
+            />
           </div>
           <div className='info-details-header__column'>
             в колонке
@@ -68,6 +77,7 @@ export const TaskInfo = ({ task, column }) => {
             target={target}
             description={task.description}
           />
+          {checks ? <ChecksMain taskId={task.id} checks={checks} /> : ''}
         </div>
         <SideBar taskId={task.id} />
       </div>
