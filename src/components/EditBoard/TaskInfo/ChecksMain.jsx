@@ -9,8 +9,9 @@ import Modal from '../../Modal/Modal';
 
 import { changeCheckTitle } from '../../Content/SingleBoard/action';
 import { FirebaseContext } from '../../FirebaseApi';
+import { ListOfCheckTasks } from './ListOfCheckTasks';
 
-export const ChecksMain = ({ taskId }) => {
+export const ChecksMain = ({ taskId, target }) => {
   const dispatch = useDispatch();
   const firebase = React.useContext(FirebaseContext);
   const { id } = useParams();
@@ -40,47 +41,50 @@ export const ChecksMain = ({ taskId }) => {
   return (
     <>
       {Object.values(checks).map((check) => (
-        <div className='main-info-destination' key={check.id}>
-          <div className='main-info-destination__title'>
-            <textarea
-              defaultValue={allChecks[check.id].title}
-              onChange={(e) =>
-                input1Change(check.id, allChecks[check.id].title, e)
-              }
-            />
-            <div className='main-info-destination-delete-check'>
-              <Modal
-                target={({ onClick }) => (
-                  <div
-                    className='main-info-destination-delete-check__button'
-                    onClick={onClick}
-                  >
-                    Удалить
-                  </div>
-                )}
-                currentId={check.id}
-              >
-                <span className='form-сheckList__title'>
-                  Удаление списка {allChecks[check.id].title}
-                </span>
-                <span className='form-сheckList__title-create'>
-                  Удаление списка задач необратимо, и не будет возможности его
-                  вернуть.
-                </span>
-                <button
-                  type='button'
-                  className='form-сheckList__delete-check '
-                  onClick={() => deleteCheck(check.id)}
+        <div className='check' key={check.id}>
+          <div className='main-info-destination'>
+            <div className='main-info-destination__title'>
+              <textarea
+                defaultValue={allChecks[check.id].title}
+                onChange={(e) =>
+                  input1Change(check.id, allChecks[check.id].title, e)
+                }
+              />
+              <div className='main-info-destination-delete-check'>
+                <Modal
+                  target={({ onClick }) => (
+                    <div
+                      className='main-info-destination-delete-check__button'
+                      onClick={onClick}
+                    >
+                      Удалить
+                    </div>
+                  )}
+                  currentId={check.id}
                 >
-                  Удалить список задач
-                </button>
-              </Modal>
+                  <span className='form-сheckList__title'>
+                    Удаление списка {allChecks[check.id].title}
+                  </span>
+                  <span className='form-сheckList__title-create'>
+                    Удаление списка задач необратимо, и не будет возможности его
+                    вернуть.
+                  </span>
+                  <button
+                    type='button'
+                    className='form-сheckList__delete-check '
+                    onClick={() => deleteCheck(check.id)}
+                  >
+                    Удалить список задач
+                  </button>
+                </Modal>
+              </div>
             </div>
+            <FontAwesomeIcon
+              icon={faCheckSquare}
+              className='main-info-destination__icon menu-icon'
+            />
           </div>
-          <FontAwesomeIcon
-            icon={faCheckSquare}
-            className='main-info-destination__icon menu-icon'
-          />
+          <ListOfCheckTasks target={target} />
         </div>
       ))}
     </>

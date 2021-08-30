@@ -60,16 +60,18 @@
   }
 
   &-main {
-    float: left;
     margin: 0;
     min-height: 24px;
     padding: 0 8px 8px 16px;
     position: relative;
     min-width: 552px;
+    &.collumns {
+      display: flex;
+      flex-direction: row;
+      padding-left: 7px;
+    }
   }
   &-sidebar {
-    float: right;
-    padding: 0 16px 8px 8px;
     min-width: calc(100% - 600px);
   }
 }
@@ -148,6 +150,9 @@
         visibility: visible;
       }
     }
+    &.addCheck {
+      margin-left: 40px;
+    }
   }
   &__buttons {
     margin-top: 10px;
@@ -156,6 +161,17 @@
     justify-content: flex-start;
     align-items: center;
     visibility: hidden;
+  }
+  &__addCheck {
+    height: 32px;
+    width: 142px;
+    border: none;
+    border-radius: 3px;
+    padding: 6px 12px;
+    cursor: pointer;
+    &:hover {
+      background-color: #091e4214;
+    }
   }
   &__delete {
     font-size: 23px;
@@ -170,7 +186,7 @@
     &__button {
       background-color: #eaecf0;
       height: 100%;
-      width: 100%;
+
       display: flex;
       justify-content: center;
       align-items: center;

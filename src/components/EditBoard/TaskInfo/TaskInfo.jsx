@@ -64,22 +64,24 @@ export const TaskInfo = ({ task, column }) => {
             <FontAwesomeIcon icon={faColumns} className='menu-icon' />
           </div>
         </div>
-        <div className='info-details-main main-info'>
-          {Object.keys(tags).length ? (
-            <TagsMainBoard tags={tags} taskId={task.id} />
-          ) : (
-            ''
-          )}
-          <Description
-            key={task.id}
-            boardId={id}
-            id={task.id}
-            target={target}
-            description={task.description}
-          />
-          {checks ? <ChecksMain taskId={task.id} /> : ''}
+        <div className='info-details-main collumns'>
+          <div className='info-details-main main-info'>
+            {Object.keys(tags).length ? (
+              <TagsMainBoard tags={tags} taskId={task.id} />
+            ) : (
+              ''
+            )}
+            <Description
+              key={task.id}
+              boardId={id}
+              id={task.id}
+              target={target}
+              description={task.description}
+            />
+            {checks ? <ChecksMain taskId={task.id} target={target} /> : ''}
+          </div>
+          <SideBar taskId={task.id} />
         </div>
-        <SideBar taskId={task.id} />
       </div>
     </div>
   );
