@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
-import { delay } from './utils';
-import Modal from '../../Modal/Modal';
+import { delay } from '../utils';
+import Modal from '../../../Modal/Modal';
 
-import { changeCheckTitle } from '../../Content/SingleBoard/action';
-import { FirebaseContext } from '../../FirebaseApi';
+import { changeCheckTitle } from '../../../Content/SingleBoard/action';
+import { FirebaseContext } from '../../../FirebaseApi';
 import { ListOfCheckTasks } from './ListOfCheckTasks';
+import { ProgressLine } from './ProgressLine';
 
 export const ChecksMain = ({ taskId, target }) => {
   const dispatch = useDispatch();
@@ -84,6 +85,7 @@ export const ChecksMain = ({ taskId, target }) => {
               className='main-info-destination__icon menu-icon'
             />
           </div>
+          <ProgressLine />
           <ListOfCheckTasks target={target} />
         </div>
       ))}

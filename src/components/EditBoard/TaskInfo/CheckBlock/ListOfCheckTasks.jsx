@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-import { FirebaseContext } from '../../FirebaseApi';
+import { FirebaseContext } from '../../../FirebaseApi';
 
 export const ListOfCheckTasks = ({ target }) => {
   const dispatch = useDispatch();

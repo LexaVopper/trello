@@ -11,7 +11,7 @@ import { Description } from './Description';
 import { changeTaskTitle } from '../../Content/SingleBoard/action';
 import { SideBar } from './SideBar/SideBar';
 import { TagsMainBoard } from './TagsMainBoard';
-import { ChecksMain } from './ChecksMain';
+import { ChecksMain } from './CheckBlock/ChecksMain';
 
 export const TaskInfo = ({ task, column }) => {
   const dispatch = useDispatch();
