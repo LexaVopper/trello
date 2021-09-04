@@ -3,7 +3,9 @@ const initialState = {
     task: {},
     columns: {},
     tags: {},
-    checks: {},
+    checks: {
+      tasks: {},
+    },
   },
   columnOrder: {},
   id: '',
@@ -192,6 +194,28 @@ const getBoard = (state = initialState, action) => {
           },
         },
       };
+
+    case 'ADD_CHECK_TASK':
+      return {
+        ...state,
+        page: {
+          ...state.page,
+          checks: {
+            ...state.page.checks,
+            [action.payload.checkId]: {
+              ...state.page.checks[action.payload.checkId],
+              tasks: {
+                ...state.page.checks[action.payload.checkId].tasks,
+                [action.payload.taskId]: {
+                  id: action.payload.taskId,
+                  title: action.payload.taskTitle,
+                  toggle: false,
+                },
+              },
+            },
+          },
+        },
+      };
     case 'COPY_CHECK':
       return {
         ...state,
@@ -265,7 +289,7 @@ const getBoard = (state = initialState, action) => {
     case 'CLEAR_BOARD_COLUMNS':
       return {
         ...state,
-        page: { task: {}, columns: {}, tags: {}, checks: {} },
+        page: { task: {}, columns: {}, tags: {}, checks: { tasks: {} } },
         columnOrder: {},
         id: '',
         error: false,

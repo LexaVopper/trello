@@ -9,8 +9,9 @@ import Modal from '../../../Modal/Modal';
 
 import { changeCheckTitle } from '../../../Content/SingleBoard/action';
 import { FirebaseContext } from '../../../FirebaseApi';
-import { ListOfCheckTasks } from './ListOfCheckTasks';
+import { AddCheckTasks } from './AddCheckTasks';
 import { ProgressLine } from './ProgressLine';
+import { ListOfCheckTasks } from './ListOfCheckTasks';
 
 export const ChecksMain = ({ taskId, target }) => {
   const dispatch = useDispatch();
@@ -86,7 +87,11 @@ export const ChecksMain = ({ taskId, target }) => {
             />
           </div>
           <ProgressLine />
-          <ListOfCheckTasks target={target} />
+          {allChecks[check.id].tasks && (
+            <ListOfCheckTasks checkTask={allChecks[check.id].tasks} />
+          )}
+
+          <AddCheckTasks checkId={check.id} target={target} />
         </div>
       ))}
     </>

@@ -152,6 +152,13 @@
     }
     &.addCheck {
       margin-left: 40px;
+
+      textarea {
+        min-height: 108px;
+        background-color: #fff;
+        box-shadow: 0 0 0 2px #0079bf;
+        resize: vertical;
+      }
     }
   }
   &__buttons {
@@ -242,38 +249,5 @@
     padding: 0 12px;
     width: auto;
     cursor: pointer;
-  }
-}
-
-.progress-check {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 6px;
-  text-align: center;
-  justify-content: center;
-
-  &__percent {
-    font-size: 15px;
-    margin-left: 10px;
-  }
-  .line {
-    width: 100%;
-    margin: 0 0 0 10px;
-    background-color: #091e4214;
-    border-radius: 4px;
-    height: 8px;
-    overflow: hidden;
-    position: relative;
-    align-self: center;
-
-    &__backLayer {
-      background: #5ba4cf;
-      bottom: 0;
-      left: 0;
-      position: absolute;
-      top: 0;
-      width: 60%;
-      transition-duration: 0.14s;
-    }
   }
 }

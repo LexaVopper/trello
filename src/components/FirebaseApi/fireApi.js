@@ -118,6 +118,17 @@ class Firebase {
     });
   }
 
+  createTaskInСheck(boardId, checkId, taskId, titleTask) {
+    this.db
+      .ref()
+      .child(`db/boards/${boardId}/checks/${checkId}/tasks/${taskId}`)
+      .update({
+        id: taskId,
+        title: titleTask,
+        toggle: false,
+      });
+  }
+
   copyСheck(boardId, check, checkId, taskId) {
     this.db
       .ref()
